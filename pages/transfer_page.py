@@ -2,10 +2,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from pages.base_page import BasePage
+from config.leitor import parametros
+
 
 class TransferPage(BasePage):
-    URL = "https://parabank.parasoft.com/parabank/transfer.htm"
-    OPEN_ACCOUNT_URL = "https://parabank.parasoft.com/parabank/openaccount.htm"
+    URL = parametros.texto("url_transferencia")
+    OPEN_ACCOUNT_URL = parametros.texto("url_abrir_conta")
 
     AMOUNT_INPUT = (By.ID, "amount")
     FROM_ACCOUNT_SELECT = (By.ID, "fromAccountId")
@@ -40,8 +42,10 @@ class TransferPage(BasePage):
             and len(driver.find_elements(*self.TO_ACCOUNT_OPTIONS)) > 0
         )
 
-    def open_new_account(self, account_type="SAVINGS"):
+    def open_new_account(self, account_type=None):
         """Abre uma conta adicional para o cliente logado (necessária para transferir entre contas)."""
+        if account_type is None:
+            account_type = parametros.texto("tipo_conta_nova")
         self.driver.get(self.OPEN_ACCOUNT_URL)
         # O botão só submete depois de o AJAX preencher o select de contas de origem
         WebDriverWait(self.driver, self.timeout).until(
@@ -69,8 +73,8 @@ class TransferPage(BasePage):
         if len(from_dropdown.options) < 2:
             raise AssertionError("São necessárias pelo menos duas contas para transferir entre contas distintas.")
 
-        from_dropdown.select_by_index(0)
-        to_dropdown.select_by_index(1)
+        from_dropdown.select_by_index(parametros.inteiro("indice_conta_origem"))
+        to_dropdown.select_by_index(parametros.inteiro("indice_conta_destino"))
 
         self.click(self.TRANSFER_BUTTON)
 
@@ -78,7 +82,8 @@ class TransferPage(BasePage):
         """Aguarda e retorna o texto do painel direito após a transferência."""
         try:
             WebDriverWait(self.driver, self.timeout).until(
-                lambda _driver: "transfer complete" in self.safe_text(self.SUCCESS_MESSAGE).lower()
+                lambda _driver: parametros.texto("mensagem_transferencia_concluida").lower()
+                in self.safe_text(self.SUCCESS_MESSAGE).lower()
             )
         except TimeoutException:
             pass

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Histórico de Testes Automated</title>
+    <style>
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1e1e24;
+            --accent-orange: #ff6b00;
+            --text-color: #e1e1e6;
+            --text-muted: #a8a8b3;
+            --passed-color: #04d361;
+            --failed-color: #f75a68;
+            --skipped-color: #eba417;
+            --border-color: #29292e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--accent-orange);
+            margin: 0;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .metric-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .metric-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .metric-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .val-total { color: var(--accent-orange); }
+        .val-passed { color: var(--passed-color); }
+        .val-failed { color: var(--failed-color); }
+        .val-skipped { color: var(--skipped-color); }
+
+        .controls-section {
+            background-color: var(--card-bg);
+            padding: 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .control-group label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        select, input {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--accent-orange);
+        }
+
+        .table-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #16161a;
+            color: var(--accent-orange);
+            padding: 12px 16px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        tr:hover {
+            background-color: #26262e;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .badge-passed { background-color: rgba(4, 211, 97, 0.15); color: var(--passed-color); border: 1px solid var(--passed-color); }
+        .badge-failed { background-color: rgba(247, 90, 104, 0.15); color: var(--failed-color); border: 1px solid var(--failed-color); }
+        .badge-skipped { background-color: rgba(235, 164, 23, 0.15); color: var(--skipped-color); border: 1px solid var(--skipped-color); }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--bg-color);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            margin-top: 5px;
+        }
+
+        .progress-passed { background-color: var(--passed-color); }
+        .progress-failed { background-color: var(--failed-color); }
+        .progress-skipped { background-color: var(--skipped-color); }
+
+        .sem-dados {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 30px 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>📊 Histórico de Execução de Testes BDD</h1>
+        <span id="datetime-str" style="color: var(--text-muted); font-size: 0.85rem;"></span>
+    </header>
+
+    <!-- Cards de Métricas Gerais (execução selecionada no filtro) -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <h3>Total de Features</h3>
+            <div class="value val-total" id="total-features">0</div>
+        </div>
+        <div class="metric-card">
+            <h3>Total de Cenários</h3>
+            <div class="value val-total" id="total-scenarios">0</div>
+        </div>
+        <div class="metric-card">
+            <h3>Total de Steps</h3>
+            <div class="value val-total" id="total-steps">0</div>
+        </div>
+        <div class="metric-card">
+            <h3>Passed (Passou)</h3>
+            <div class="value val-passed" id="count-passed">0</div>
+            <small id="pct-passed" style="color: var(--passed-color);">0%</small>
+        </div>
+        <div class="metric-card">
+            <h3>Failed (Falhou)</h3>
+            <div class="value val-failed" id="count-failed">0</div>
+            <small id="pct-failed" style="color: var(--failed-color);">0%</small>
+        </div>
+        <div class="metric-card">
+            <h3>Skipped (Ignorado)</h3>
+            <div class="value val-skipped" id="count-skipped">0</div>
+            <small id="pct-skipped" style="color: var(--skipped-color);">0%</small>
+        </div>
+        <div class="metric-card">
+            <h3>Execuções no Histórico</h3>
+            <div class="value val-total" id="total-execucoes">0</div>
+            <small id="limite-historico" style="color: var(--text-muted);"></small>
+        </div>
+    </div>
+
+    <!-- Barra Visual de Taxa de Sucesso -->
+    <div style="margin-bottom: 25px; background: var(--card-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.85rem; font-weight: 600;">
+            <span id="subtitulo-taxa">Taxa Geral de Sucesso</span>
+            <span id="overall-pass-rate">0%</span>
+        </div>
+        <div class="progress-bar">
+            <div id="bar-passed" class="progress-passed" style="width: 0%;"></div>
+            <div id="bar-failed" class="progress-failed" style="width: 0%;"></div>
+            <div id="bar-skipped" class="progress-skipped" style="width: 0%;"></div>
+        </div>
+    </div>
+
+    <!-- Painel de Filtros Dinâmicos -->
+    <div class="controls-section">
+        <div class="control-group">
+            <label for="filter-execucao">Execução</label>
+            <select id="filter-execucao" onchange="atualizarTudo()">
+                <option value="">Mais recente</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="filter-status">Resultado</label>
+            <select id="filter-status" onchange="filterData()">
+                <option value="">Todos</option>
+                <option value="passed">Sem falhas</option>
+                <option value="failed">Com falhas</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="search-input">Buscar por data / hora</label>
+            <input type="text" id="search-input" placeholder="Digite para filtrar..." onkeyup="filterData()">
+        </div>
+    </div>
+
+    <!-- Tabela Dinâmica de Registros -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Início</th>
+                    <th>Fim</th>
+                    <th>Features</th>
+                    <th>Cenários</th>
+                    <th>Steps</th>
+                    <th>Passed (steps)</th>
+                    <th>Failed (steps)</th>
+                    <th>Skipped (steps)</th>
+                    <th>Taxa de Sucesso</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="test-table-body">
+                <!-- Preenchido com os dados de docs/log.xlsx -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        /* DADOS-INICIO */
+        const execucoes = [
+                {
+                    "data": "07/11/2026",
+                    "inicio": "16:41:40",
+                    "fim": "16:42:40",
+                    "features": {
+                        "total": 3,
+                        "passed": 2,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 6,
+                        "passed": 5,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 28,
+                        "passed": 21,
+                        "failed": 1,
+                        "skipped": 6
+                    },
+                    "chave": "07/11/2026 16:41:40",
+                    "total": 37,
+                    "falhas": 3,
+                    "taxa": 75.0,
+                    "status": "failed"
+                },
+                {
+                    "data": "07/11/2026",
+                    "inicio": "17:04:37",
+                    "fim": "17:05:43",
+                    "features": {
+                        "total": 3,
+                        "passed": 3,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 6,
+                        "passed": 6,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 28,
+                        "passed": 28,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "07/11/2026 17:04:37",
+                    "total": 37,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
+                },
+                {
+                    "data": "07/11/2026",
+                    "inicio": "17:15:30",
+                    "fim": "17:16:36",
+                    "features": {
+                        "total": 3,
+                        "passed": 3,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 6,
+                        "passed": 6,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 28,
+                        "passed": 28,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "07/11/2026 17:15:30",
+                    "total": 37,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
+                },
+                {
+                    "data": "07/11/2026",
+                    "inicio": "17:17:10",
+                    "fim": "17:18:13",
+                    "features": {
+                        "total": 3,
+                        "passed": 3,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 6,
+                        "passed": 6,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 28,
+                        "passed": 28,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "07/11/2026 17:17:10",
+                    "total": 37,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
+                }
+            ];
+        /* DADOS-FIM */
+
+        const rotulos = {
+            passed: 'Passed',
+            failed: 'Failed',
+            skipped: 'Skipped'
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('datetime-str').innerText = 'Atualizado em: ' + new Date().toLocaleString('pt-BR');
+            document.getElementById('limite-historico').innerText = 'limite: 5 mais recentes';
+            popularExecucoes();
+            atualizarTudo();
+        });
+
+        function popularExecucoes() {
+            const select = document.getElementById('filter-execucao');
+            [...execucoes].reverse().forEach(execucao => {
+                const opt = document.createElement('option');
+                opt.value = execucao.chave;
+                opt.textContent = `${execucao.chave} — ${rotulos[execucao.status] || execucao.status}`;
+                select.appendChild(opt);
+            });
+        }
+
+        // Execução exibida nos cards e na barra de progresso
+        function execucaoSelecionada() {
+            if (!execucoes.length) return null;
+            const chave = document.getElementById('filter-execucao').value;
+            if (!chave) return execucoes[execucoes.length - 1];
+            return execucoes.find(execucao => execucao.chave === chave) || execucoes[execucoes.length - 1];
+        }
+
+        function atualizarTudo() {
+            atualizarResumo();
+            filterData();
+        }
+
+        function atualizarResumo() {
+            const execucao = execucaoSelecionada();
+            const steps = execucao ? execucao.steps : { total: 0, passed: 0, failed: 0, skipped: 0 };
+
+            document.getElementById('total-features').innerText = execucao ? execucao.features.total : 0;
+            document.getElementById('total-scenarios').innerText = execucao ? execucao.cenarios.total : 0;
+            document.getElementById('total-steps').innerText = steps.total;
+            document.getElementById('total-execucoes').innerText = execucoes.length;
+
+            const pct = (valor) => (steps.total ? ((valor / steps.total) * 100).toFixed(1) : '0.0');
+
+            document.getElementById('count-passed').innerText = steps.passed;
+            document.getElementById('pct-passed').innerText = `${pct(steps.passed)}% dos steps`;
+
+            document.getElementById('count-failed').innerText = steps.failed;
+            document.getElementById('pct-failed').innerText = `${pct(steps.failed)}% dos steps`;
+
+            document.getElementById('count-skipped').innerText = steps.skipped;
+            document.getElementById('pct-skipped').innerText = `${pct(steps.skipped)}% dos steps`;
+
+            const taxa = execucao ? execucao.taxa : 0;
+            document.getElementById('subtitulo-taxa').innerText = execucao
+                ? `Taxa Geral de Sucesso — execução de ${execucao.chave}`
+                : 'Taxa Geral de Sucesso';
+            document.getElementById('overall-pass-rate').innerText = `${taxa}% Sucesso`;
+            document.getElementById('bar-passed').style.width = `${pct(steps.passed)}%`;
+            document.getElementById('bar-failed').style.width = `${pct(steps.failed)}%`;
+            document.getElementById('bar-skipped').style.width = `${pct(steps.skipped)}%`;
+        }
+
+        function linha(execucao) {
+            const tr = document.createElement('tr');
+            const detalhe = (grupo) => `Passed: ${grupo.passed} | Failed: ${grupo.failed} | Skipped: ${grupo.skipped}`;
+
+            tr.innerHTML = `
+                <td><b>${execucao.data}</b></td>
+                <td>${execucao.inicio}</td>
+                <td>${execucao.fim}</td>
+                <td title="${detalhe(execucao.features)}">${execucao.features.total}</td>
+                <td title="${detalhe(execucao.cenarios)}">${execucao.cenarios.total}</td>
+                <td title="${detalhe(execucao.steps)}">${execucao.steps.total}</td>
+                <td style="color: var(--passed-color);">${execucao.steps.passed}</td>
+                <td style="color: var(--failed-color);">${execucao.steps.failed}</td>
+                <td style="color: var(--skipped-color);">${execucao.steps.skipped}</td>
+                <td><b>${execucao.taxa}%</b></td>
+                <td><span class="badge badge-${execucao.status}">${rotulos[execucao.status] || execucao.status}</span></td>
+            `;
+
+            return tr;
+        }
+
+        function filterData() {
+            const tbody = document.getElementById('test-table-body');
+            const selecionada = document.getElementById('filter-execucao').value;
+            const status = document.getElementById('filter-status').value;
+            const busca = document.getElementById('search-input').value.toLowerCase().trim();
+
+            const filtradas = [...execucoes].reverse().filter(execucao => {
+                const matchExecucao = !selecionada || execucao.chave === selecionada;
+                const matchStatus = !status || execucao.status === status;
+                const matchBusca = !busca ||
+                    execucao.data.toLowerCase().includes(busca) ||
+                    execucao.inicio.toLowerCase().includes(busca) ||
+                    execucao.chave.toLowerCase().includes(busca);
+
+                return matchExecucao && matchStatus && matchBusca;
+            });
+
+            tbody.innerHTML = '';
+
+            if (!filtradas.length) {
+                tbody.innerHTML = `<tr><td colspan="11" class="sem-dados">Nenhuma execução registrada. Rode os testes e o relatório será atualizado automaticamente.</td></tr>`;
+                return;
+            }
+
+            filtradas.forEach(execucao => tbody.appendChild(linha(execucao)));
+        }
+    </script>
+</body>
+</html>

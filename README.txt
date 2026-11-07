@@ -50,3 +50,26 @@ CRIAÇÃO.........: 06/11/26
     Para dar fé nas imagens dos testes, criei um vídeo demonstrativo.
     Ele foi colocado na pasta "docs" e o seu nome é "evidencia_completa.mp4".
 
+# 3-) PARÂMETROS DE TESTE (PLANILHA)\r
+
+    Todos os parâmetros dos testes ficam na planilha "config\parametros.xlsx".
+    Para alterar qualquer valor, basta editar a planilha e executar os testes normalmente.
+
+    Abas da planilha:
+
+	- PARAMETROS......: SECAO | CHAVE | VALOR | DESCRICAO
+	                    URLs do sistema, opções do navegador, tempos de espera,
+	                    dados de login, transferência, mensagens esperadas e pasta de evidências.
+	- DADOS_CADASTRO..: PERFIL | primeiro_nome | sobrenome | endereco | cidade | estado
+	                    | cep | telefone | ssn | senha | prefixo_usuario
+	                    Um perfil por cenário (CADASTRO, LOGIN e TRANSFERENCIA).
+	                    Deixando o campo ssn vazio, o teste gera um SSN exclusivo automaticamente.
+	- INSTRUCOES......: lembrete de como editar a planilha.
+
+    Observações:
+	- Não renomeie as abas nem a coluna CHAVE: os testes localizam os valores por esses nomes.
+	- Valores booleanos aceitam True/False (também Sim/Não).
+	- mensagens_sucesso_transferencia aceita vários textos separados por ";".
+	- A planilha é lida pelo arquivo "config/leitor.py".
+	- Para recriar a planilha com os valores de fábrica: python config\gerar_planilha.py --forcar
+

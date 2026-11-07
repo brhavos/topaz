@@ -2,10 +2,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 
+from config.leitor import parametros
+
+
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
-        self.timeout = 10
+        self.timeout = parametros.decimal("tempo_espera_padrao")
 
     def safe_text(self, locator):
         """Texto do elemento, tolerante a elementos obsoletos durante navegações/AJAX."""

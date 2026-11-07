@@ -2,9 +2,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
+from config.leitor import parametros
+
 
 class LoginPage(BasePage):
-    URL = "https://parabank.parasoft.com/parabank/index.htm"
+    URL = parametros.texto("url_login")
 
     USERNAME_INPUT = (By.NAME, "username")
     PASSWORD_INPUT = (By.NAME, "password")
@@ -34,7 +36,7 @@ class LoginPage(BasePage):
         """Verifica se o login foi bem-sucedido procurando elementos exclusivos do painel logado."""
         try:
             # Aguarda até 5 segundos para detetar o link de Log Out ou a visão geral de contas
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, parametros.decimal("tempo_espera_login")).until(
                 lambda driver: len(driver.find_elements(*self.LOGOUT_LINK)) > 0 or 
                                len(driver.find_elements(*self.ACCOUNT_OVERVIEW)) > 0
             )

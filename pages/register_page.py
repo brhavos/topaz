@@ -4,9 +4,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from pages.base_page import BasePage
+from config.leitor import parametros
+
 
 class RegisterPage(BasePage):
-    URL = "https://parabank.parasoft.com/parabank/register.htm"
+    URL = parametros.texto("url_cadastro")
 
     FIRST_NAME_INPUT = (By.ID, "customer.firstName")
     LAST_NAME_INPUT = (By.ID, "customer.lastName")
@@ -30,9 +32,11 @@ class RegisterPage(BasePage):
         """Simula a digitação humanizada caractere por caractere."""
         element = self.find_element(locator)
         element.clear()
+        intervalo_min = parametros.decimal("digitacao_intervalo_min")
+        intervalo_max = parametros.decimal("digitacao_intervalo_max")
         for char in text:
             element.send_keys(char)
-            time.sleep(random.uniform(0.05, 0.12))
+            time.sleep(random.uniform(intervalo_min, intervalo_max))
 
     def fill_register_form(self, first, last, address, city, state, zip_code, phone, ssn, username, password):
         self._human_type(self.FIRST_NAME_INPUT, first)
@@ -48,7 +52,7 @@ class RegisterPage(BasePage):
         self._human_type(self.CONFIRM_INPUT, password)
 
     def submit_register(self):
-        time.sleep(0.5)
+        time.sleep(parametros.decimal("pausa_curta"))
         self.click(self.REGISTER_BUTTON)
 
     def get_form_errors(self):
@@ -66,7 +70,8 @@ class RegisterPage(BasePage):
         """Aguarda o título de boas-vindas da página pós-registo."""
         try:
             WebDriverWait(self.driver, self.timeout).until(
-                lambda _driver: "welcome" in self.safe_text(self.SUCCESS_MESSAGE).lower()
+                lambda _driver: parametros.texto("mensagem_boas_vindas").lower()
+                in self.safe_text(self.SUCCESS_MESSAGE).lower()
             )
         except TimeoutException:
             errors = self.get_form_errors()
