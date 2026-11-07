@@ -1,50 +1,76 @@
 @echo off
 setlocal enabledelayedexpansion
-title Automacao de Testes - Inicializacao Inteligente
+title Automacao de Testes
 
 echo ========================================================
 echo [1/4] Verificando se o Python esta instalado...
 echo ========================================================
 
-python --version >nul 2>&1
-if %errorlevel% neq 0 (
-    echo [AVISO] Python nao encontrado nesta maquina. 
-    echo Iniciando o download e instalacao automatica do Python...
-    
-    :: Define a URL oficial do instalador do Python 3.11 (ou versao compativel)
-    set "PYTHON_INSTALLER=python-3.11.8-amd64.exe"
-    set "PYTHON_URL=https://www.python.org/ftp/python/3.11.8/!PYTHON_INSTALLER!"
-    
-    echo Baixando o instalador do Python...
-    powershell -Command "Invoke-WebRequest -Uri '!PYTHON_URL!' -OutFile '!PYTHON_INSTALLER!'"
-    
-    echo Instalando o Python (aguarde alguns instantes)...
-    :: Instala silenciosamente, adiciona ao PATH para todos os usuarios e instala o pip
-    start /wait "" "!PYTHON_INSTALLER!" /quiet InstallAllUsers=1 PrependPath=1 Include_pip=1
-    
-    echo Removendo arquivos temporarios de instalacao...
-    del "!PYTHON_INSTALLER!"
-    
-    echo [SUCESSO] Python instalado com sucesso!
-    echo IMPORTANTE: Caso o terminal nao reconheca o Python imediatamente, feche este prompt e abra novamente.
-    echo.
+set "PYTHON_EXE="
+
+:: 1. Verifica primeiro nos caminhos oficiais de instalacao (evita o atalho da Windows Store)
+if exist "C:\Program Files\Python311\python.exe" (
+    set "PYTHON_EXE=C:\Program Files\Python311\python.exe"
+) else if exist "%LocalAppData%\Programs\Python\Python311\python.exe" (
+    set "PYTHON_EXE=%LocalAppData%\Programs\Python\Python311\python.exe"
 ) else (
-    echo [OK] Python ja esta instalado na maquina.
+    :: 2. Se nao esta nos caminhos padroes, procura no PATH ignorando a pasta WindowsApps
+    for /f "tokens=*" %%i in ('where python 2^>nul') do (
+        echo %%i | findstr /i "WindowsApps" >nul
+        if errorlevel 1 (
+            if not defined PYTHON_EXE set "PYTHON_EXE=%%i"
+        )
+    )
 )
+
+:: 3. Se nao encontrou um Python real, baixa e instala a versao oficial
+if not defined PYTHON_EXE (
+    echo [AVISO] Python real nao encontrado. Baixando e instalando...
+    
+    powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.11.8/python-3.11.8-amd64.exe' -OutFile 'python_installer.exe'"
+    if errorlevel 1 (
+        echo [ERRO] Falha no download. Verifique sua conexao.
+        pause
+        exit /b 1
+    )
+
+    echo Instalando o Python...
+    powershell -NoProfile -Command "Start-Process -FilePath 'python_installer.exe' -ArgumentList '/quiet', 'InstallAllUsers=1', 'PrependPath=1', 'Include_pip=1' -Wait -NoNewWindow"
+    del "python_installer.exe" >nul 2>&1
+
+    if exist "C:\Program Files\Python311\python.exe" (
+        set "PYTHON_EXE=C:\Program Files\Python311\python.exe"
+    ) else if exist "%LocalAppData%\Programs\Python\Python311\python.exe" (
+        set "PYTHON_EXE=%LocalAppData%\Programs\Python\Python311\python.exe"
+    )
+)
+
+if not defined PYTHON_EXE (
+    echo [ERRO] A instalacao falhou ou o Python nao foi localizado.
+    pause
+    exit /b 1
+)
+
+echo [OK] Python localizado em: "%PYTHON_EXE%"
 
 echo.
 echo ========================================================
-echo [2/4] Verificando e criando o ambiente virtual (venv)...
+echo [2/4] Criando ambiente virtual (venv)...
 echo ========================================================
 if not exist "venv" (
-    python -m venv venv
+    "%PYTHON_EXE%" -m venv venv
+    if errorlevel 1 (
+        echo [ERRO] Falha ao criar o ambiente virtual.
+        pause
+        exit /b 1
+    )
 )
 
 echo.
 echo ========================================================
-echo [3/4] Instalando/atualizando dependencias (requirements.txt)...
+echo [3/4] Instalando dependencias...
 echo ========================================================
-call venv\Scripts\activate
+call venv\Scripts\activate.bat
 python -m pip install --upgrade pip
 if exist "requirements.txt" (
     pip install -r requirements.txt
@@ -54,12 +80,10 @@ if exist "requirements.txt" (
 
 echo.
 echo ========================================================
-echo [4/4] Executando os testes BDD com Behave...
+echo [4/4] Executando os testes...
 echo ========================================================
 behave
 
 echo.
-echo ========================================================
-echo Processo finalizado com sucesso!
-echo ========================================================
+echo Processo finalizado.
 pause
