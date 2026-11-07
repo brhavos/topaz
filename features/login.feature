@@ -18,7 +18,7 @@ Funcionalidade: Autenticação de Usuário (Login)
     Então o sistema deve recusar o acesso e exibir a mensagem de erro esperada
 
     Exemplos:
-      | usuario           | senha        |
+      | usuario             | senha        |
       | usuario_inexistente | senha123     |
-      |                   |              |
-      | standard_user     | senha_errada |
+      |                     |              |
+      | standard_user       | senha_errada |

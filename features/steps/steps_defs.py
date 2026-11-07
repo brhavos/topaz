@@ -20,7 +20,7 @@ def step_impl(context):
 
 @when('preencho o formulário de registro com dados válidos e exclusivos')
 def step_impl(context):
-    # O ParaBank limita o username a 20 caracteres, por isso usamos um valor curto e único
+    # O ParaBank limita o username a 20 caracteres, por isso usei um valor curto e único
     context.test_username = f"qa_{uuid.uuid4().hex[:9]}"
     context.test_password = "Senha123@"
     unique_ssn = str(random.randint(100000, 999999))
