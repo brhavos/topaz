@@ -59,17 +59,28 @@ CRIAÇÃO.........: 06/11/26
 
 	- PARAMETROS......: SECAO | CHAVE | VALOR | DESCRICAO
 	                    URLs do sistema, opções do navegador, tempos de espera,
-	                    dados de login, transferência, mensagens esperadas e pasta de evidências.
-	- DADOS_CADASTRO..: PERFIL | primeiro_nome | sobrenome | endereco | cidade | estado
-	                    | cep | telefone | ssn | senha | prefixo_usuario
-	                    Um perfil por cenário (CADASTRO, LOGIN e TRANSFERENCIA).
+	                    dados de login, quantidades/valores de transferência,
+	                    mensagens esperadas e pasta de evidências.
+	- DADOS_CADASTRO..: PERFIL | tipo | primeiro_nome | sobrenome | endereco | cidade | estado
+	                    | cep | telefone | ssn | senha | prefixo_usuario | erro_esperado | ativo
+	                    Tipo PERFIL: um perfil por cenário (CADASTRO, LOGIN e TRANSFERENCIA).
+	                    Tipo VALIDO: 10 usuários registrados pela massa de testes.
+	                    Tipo INVALIDO: 5 usuários recusados; erro_esperado indica a mensagem exigida.
 	                    Deixando o campo ssn vazio, o teste gera um SSN exclusivo automaticamente.
+	                    Coluna ativo: S executa o registro e N o ignora sem apagar a linha (padrão S).
 	- INSTRUCOES......: lembrete de como editar a planilha.
 
     Observações:
 	- Não renomeie as abas nem a coluna CHAVE: os testes localizam os valores por esses nomes.
 	- Valores booleanos aceitam True/False (também Sim/Não).
+	- A massa de usuários usa somente os registros da aba DADOS_CADASTRO com
+	  ativo = S; os marcados com N são ignorados, sem precisar apagar a linha.
 	- mensagens_sucesso_transferencia aceita vários textos separados por ";".
+	- quantidade_transferencias_validas e quantidade_transferencias_invalidas
+	  definem quantas transferências executar (padrão 10 e 3). Quando a quantidade
+	  supera a lista de valores, os valores são repetidos ciclicamente.
+	- Cada transação executada é registrada em "docs/log_transacoes.txt", com
+	  data/hora, usuário, contas, valor, situação e mensagem.
 	- A planilha é lida pelo arquivo "config/leitor.py".
 	- Para recriar a planilha com os valores de fábrica: python config\gerar_planilha.py --forcar
 

@@ -3,9 +3,9 @@ Histórico das execuções de teste na planilha "docs/log.xlsx".
 
 Cada execução do behave (executa.bat ou o comando behave) grava uma única linha
 com a data, hora de início e de fim e as contagens de features, cenários e
-steps por status (PASSED / FAILED / SKIPPED). A planilha mantém sempre apenas
-as MAX_HISTORICOS execuções mais recentes: ao gravar uma nova, as linhas mais
-antigas são descartadas.
+steps por status (PASSED / FAILED / SKIPPED). A planilha não tem limite de
+registros: todas as execuções são mantidas, sempre ordenadas da mais recente
+para a mais antiga (a quantidade de linhas é controlada manualmente).
 
 A gravação acontece uma única vez, no hook after_all de features/environment.py.
 Ela nunca interrompe os testes: se não for possível escrever na planilha (por
@@ -27,7 +27,6 @@ RAIZ_PROJETO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CAMINHO_LOG = os.path.join(RAIZ_PROJETO, "docs", "log.xlsx")
 
 ABA_LOG = "Plan1"
-MAX_HISTORICOS = 5
 
 TITULO = "HISTÓRICO DE EXECUÇÃO DE TESTES"
 
@@ -63,12 +62,21 @@ def _texto(valor):
     return "" if valor is None else str(valor).strip().upper()
 
 
+def _ordenacao(valores):
+    """Data e hora de início de uma linha, usadas para ordenar a planilha."""
+    data = _formatar_data(valores[0])
+    hora = _formatar_hora(valores[1])
+    try:
+        return datetime.strptime(f"{data} {hora}", "%d/%m/%Y %H:%M:%S")
+    except ValueError:
+        return datetime.min
+
+
 class HistoricoExecucao:
     """Acumula o resultado da execução atual e o registra em docs/log.xlsx."""
 
-    def __init__(self, caminho=CAMINHO_LOG, max_historicos=MAX_HISTORICOS):
+    def __init__(self, caminho=CAMINHO_LOG):
         self.caminho = caminho
-        self.max_historicos = max_historicos
         self.inicio = datetime.now()
         self.fim = None
         self.features = []
@@ -127,16 +135,18 @@ class HistoricoExecucao:
         return None
 
     @staticmethod
-    def _linhas_com_dados(aba, linha_cabecalho):
-        """Linhas já preenchidas abaixo do cabeçalho."""
-        linhas = []
+    def _valores_existentes(aba, linha_cabecalho):
+        """Linhas já preenchidas abaixo do cabeçalho, como listas de valores."""
+        registros = []
         for linha in range(linha_cabecalho + 1, aba.max_row + 1):
-            if any(
-                aba.cell(row=linha, column=coluna).value not in (None, "")
+            valores = [
+                aba.cell(row=linha, column=coluna).value
                 for coluna in range(1, len(CABECALHO) + 1)
-            ):
-                linhas.append(linha)
-        return linhas
+            ]
+            if all(valor in (None, "") for valor in valores):
+                continue
+            registros.append(valores)
+        return registros
 
     def _preparar_cabecalho(self, aba):
         """Cria título e cabeçalho quando a planilha ainda está vazia."""
@@ -159,16 +169,18 @@ class HistoricoExecucao:
         if linha_cabecalho is None:
             linha_cabecalho = self._preparar_cabecalho(aba)
 
-        linhas = self._linhas_com_dados(aba, linha_cabecalho)
-        proxima_linha = (linhas[-1] + 1) if linhas else linha_cabecalho + 1
+        # Sem limite de registros: mantém todas as execuções, sempre da mais
+        # recente para a mais antiga.
+        registros = self._valores_existentes(aba, linha_cabecalho)
+        registros.append(self._linha())
+        registros.sort(key=_ordenacao, reverse=True)
 
-        for coluna, valor in enumerate(self._linha(), start=1):
-            aba.cell(row=proxima_linha, column=coluna, value=valor)
+        if aba.max_row > linha_cabecalho:
+            aba.delete_rows(linha_cabecalho + 1, aba.max_row - linha_cabecalho)
 
-        linhas.append(proxima_linha)
-        excesso = len(linhas) - self.max_historicos
-        for linha in reversed(linhas[:max(0, excesso)]):
-            aba.delete_rows(linha, 1)
+        for deslocamento, valores in enumerate(registros, start=1):
+            for coluna, valor in enumerate(valores, start=1):
+                aba.cell(row=linha_cabecalho + deslocamento, column=coluna, value=valor)
 
         planilha.save(self.caminho)
 
@@ -254,6 +266,7 @@ def ler_registros(caminho=CAMINHO_LOG):
         ]
         if all(valor in (None, "") for valor in valores):
             continue
-        registros.append(_registro(valores))
+        registros.append((_ordenacao(valores), _registro(valores)))
 
-    return registros
+    registros.sort(key=lambda item: item[0])
+    return [registro for _, registro in registros]

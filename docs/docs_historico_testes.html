@@ -105,7 +105,7 @@
             font-weight: 600;
         }
 
-        select, input {
+        select, input[type="text"] {
             background-color: var(--bg-color);
             color: var(--text-color);
             border: 1px solid var(--border-color);
@@ -115,8 +115,24 @@
             outline: none;
         }
 
-        select:focus, input:focus {
+        select:focus, input[type="text"]:focus {
             border-color: var(--accent-orange);
+        }
+
+        .col-selecao {
+            width: 80px;
+            text-align: center;
+        }
+
+        input[type="radio"] {
+            accent-color: var(--accent-orange);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        tr.linha-selecionada {
+            background-color: #26262e;
         }
 
         .table-container {
@@ -192,7 +208,7 @@
         <span id="datetime-str" style="color: var(--text-muted); font-size: 0.85rem;"></span>
     </header>
 
-    <!-- Cards de Métricas Gerais (execução selecionada no filtro) -->
+    <!-- Cards de Métricas Gerais (execução selecionada no histórico) -->
     <div class="metrics-grid">
         <div class="metric-card">
             <h3>Total de Features</h3>
@@ -244,12 +260,6 @@
     <!-- Painel de Filtros Dinâmicos -->
     <div class="controls-section">
         <div class="control-group">
-            <label for="filter-execucao">Execução</label>
-            <select id="filter-execucao" onchange="atualizarTudo()">
-                <option value="">Mais recente</option>
-            </select>
-        </div>
-        <div class="control-group">
             <label for="filter-status">Resultado</label>
             <select id="filter-status" onchange="filterData()">
                 <option value="">Todos</option>
@@ -268,6 +278,7 @@
         <table>
             <thead>
                 <tr>
+                    <th class="col-selecao">Seleção</th>
                     <th>Data</th>
                     <th>Início</th>
                     <th>Fim</th>
@@ -401,6 +412,426 @@
                     "falhas": 0,
                     "taxa": 100.0,
                     "status": "passed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "08:54:07",
+                    "fim": "08:55:09",
+                    "features": {
+                        "total": 3,
+                        "passed": 3,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 6,
+                        "passed": 6,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 28,
+                        "passed": 28,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "08/11/2026 08:54:07",
+                    "total": 37,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "09:03:32",
+                    "fim": "09:04:37",
+                    "features": {
+                        "total": 3,
+                        "passed": 3,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 6,
+                        "passed": 6,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 28,
+                        "passed": 28,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "08/11/2026 09:03:32",
+                    "total": 37,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "09:32:45",
+                    "fim": "09:33:39",
+                    "features": {
+                        "total": 1,
+                        "passed": 1,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 2,
+                        "passed": 2,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 8,
+                        "passed": 8,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "08/11/2026 09:32:45",
+                    "total": 11,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "09:34:11",
+                    "fim": "09:37:26",
+                    "features": {
+                        "total": 1,
+                        "passed": 1,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 2,
+                        "passed": 2,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 4,
+                        "passed": 4,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "08/11/2026 09:34:11",
+                    "total": 7,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "09:39:48",
+                    "fim": "09:44:59",
+                    "features": {
+                        "total": 4,
+                        "passed": 3,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 9,
+                        "passed": 8,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 33,
+                        "passed": 31,
+                        "failed": 1,
+                        "skipped": 1
+                    },
+                    "chave": "08/11/2026 09:39:48",
+                    "total": 46,
+                    "falhas": 3,
+                    "taxa": 93.9,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "09:46:10",
+                    "fim": "09:51:09",
+                    "features": {
+                        "total": 4,
+                        "passed": 4,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 9,
+                        "passed": 9,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 33,
+                        "passed": 33,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "08/11/2026 09:46:10",
+                    "total": 46,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "10:12:39",
+                    "fim": "10:13:31",
+                    "features": {
+                        "total": 1,
+                        "passed": 0,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 2,
+                        "passed": 0,
+                        "failed": 2,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 8,
+                        "passed": 0,
+                        "failed": 2,
+                        "skipped": 6
+                    },
+                    "chave": "08/11/2026 10:12:39",
+                    "total": 11,
+                    "falhas": 5,
+                    "taxa": 0.0,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "10:13:54",
+                    "fim": "10:14:46",
+                    "features": {
+                        "total": 1,
+                        "passed": 0,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 2,
+                        "passed": 0,
+                        "failed": 2,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 8,
+                        "passed": 0,
+                        "failed": 2,
+                        "skipped": 6
+                    },
+                    "chave": "08/11/2026 10:13:54",
+                    "total": 11,
+                    "falhas": 5,
+                    "taxa": 0.0,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "10:20:08",
+                    "fim": "10:20:59",
+                    "features": {
+                        "total": 1,
+                        "passed": 0,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 2,
+                        "passed": 0,
+                        "failed": 2,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 8,
+                        "passed": 0,
+                        "failed": 2,
+                        "skipped": 6
+                    },
+                    "chave": "08/11/2026 10:20:08",
+                    "total": 11,
+                    "falhas": 5,
+                    "taxa": 0.0,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "10:22:55",
+                    "fim": "10:23:46",
+                    "features": {
+                        "total": 1,
+                        "passed": 0,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 2,
+                        "passed": 0,
+                        "failed": 2,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 8,
+                        "passed": 0,
+                        "failed": 2,
+                        "skipped": 6
+                    },
+                    "chave": "08/11/2026 10:22:55",
+                    "total": 11,
+                    "falhas": 5,
+                    "taxa": 0.0,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "10:29:29",
+                    "fim": "10:35:03",
+                    "features": {
+                        "total": 4,
+                        "passed": 0,
+                        "failed": 4,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 9,
+                        "passed": 4,
+                        "failed": 5,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 33,
+                        "passed": 21,
+                        "failed": 5,
+                        "skipped": 7
+                    },
+                    "chave": "08/11/2026 10:29:29",
+                    "total": 46,
+                    "falhas": 14,
+                    "taxa": 63.6,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "10:53:07",
+                    "fim": "10:58:13",
+                    "features": {
+                        "total": 4,
+                        "passed": 2,
+                        "failed": 2,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 9,
+                        "passed": 6,
+                        "failed": 3,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 33,
+                        "passed": 24,
+                        "failed": 3,
+                        "skipped": 6
+                    },
+                    "chave": "08/11/2026 10:53:07",
+                    "total": 46,
+                    "falhas": 8,
+                    "taxa": 72.7,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "11:00:51",
+                    "fim": "11:03:33",
+                    "features": {
+                        "total": 4,
+                        "passed": 2,
+                        "failed": 2,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 9,
+                        "passed": 7,
+                        "failed": 2,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 33,
+                        "passed": 27,
+                        "failed": 2,
+                        "skipped": 4
+                    },
+                    "chave": "08/11/2026 11:00:51",
+                    "total": 46,
+                    "falhas": 6,
+                    "taxa": 81.8,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "11:12:17",
+                    "fim": "11:14:42",
+                    "features": {
+                        "total": 4,
+                        "passed": 3,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 9,
+                        "passed": 8,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 33,
+                        "passed": 32,
+                        "failed": 1,
+                        "skipped": 0
+                    },
+                    "chave": "08/11/2026 11:12:17",
+                    "total": 46,
+                    "falhas": 3,
+                    "taxa": 97.0,
+                    "status": "failed"
+                },
+                {
+                    "data": "08/11/2026",
+                    "inicio": "11:15:34",
+                    "fim": "11:17:23",
+                    "features": {
+                        "total": 4,
+                        "passed": 4,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "cenarios": {
+                        "total": 9,
+                        "passed": 9,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "steps": {
+                        "total": 33,
+                        "passed": 33,
+                        "failed": 0,
+                        "skipped": 0
+                    },
+                    "chave": "08/11/2026 11:15:34",
+                    "total": 46,
+                    "falhas": 0,
+                    "taxa": 100.0,
+                    "status": "passed"
                 }
             ];
         /* DADOS-FIM */
@@ -411,29 +842,45 @@
             skipped: 'Skipped'
         };
 
+        // Chave do histórico marcado no botão de rádio (mais recente por padrão).
+        let selecionada = null;
+
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('datetime-str').innerText = 'Atualizado em: ' + new Date().toLocaleString('pt-BR');
-            document.getElementById('limite-historico').innerText = 'limite: 5 mais recentes';
-            popularExecucoes();
+            document.getElementById('limite-historico').innerText = 'sem limite de registros';
+            const ordenadas = execucoesOrdenadas();
+            selecionada = ordenadas.length ? ordenadas[0].chave : null;
             atualizarTudo();
         });
 
-        function popularExecucoes() {
-            const select = document.getElementById('filter-execucao');
-            [...execucoes].reverse().forEach(execucao => {
-                const opt = document.createElement('option');
-                opt.value = execucao.chave;
-                opt.textContent = `${execucao.chave} — ${rotulos[execucao.status] || execucao.status}`;
-                select.appendChild(opt);
-            });
+        // Converte "dd/mm/aaaa" + "hh:mm:ss" em uma chave ordenável.
+        function chaveOrdenacao(execucao) {
+            const [dia, mes, ano] = String(execucao.data).split('/');
+            return `${ano}-${mes}-${dia} ${execucao.inicio}`;
         }
 
-        // Execução exibida nos cards e na barra de progresso
+        // Históricos do mais recente para o mais antigo.
+        function execucoesOrdenadas() {
+            return [...execucoes].sort((a, b) => chaveOrdenacao(b).localeCompare(chaveOrdenacao(a)));
+        }
+
+        // Execução exibida nos cards e na barra de progresso.
         function execucaoSelecionada() {
-            if (!execucoes.length) return null;
-            const chave = document.getElementById('filter-execucao').value;
-            if (!chave) return execucoes[execucoes.length - 1];
-            return execucoes.find(execucao => execucao.chave === chave) || execucoes[execucoes.length - 1];
+            const ordenadas = execucoesOrdenadas();
+            return ordenadas.find(execucao => execucao.chave === selecionada) || ordenadas[0] || null;
+        }
+
+        // Marca o histórico escolhido e atualiza as métricas na hora.
+        function selecionarExecucao(chave) {
+            selecionada = chave;
+            atualizarResumo();
+            marcarLinhaSelecionada();
+        }
+
+        function marcarLinhaSelecionada() {
+            document.querySelectorAll('#test-table-body tr[data-chave]').forEach(tr => {
+                tr.classList.toggle('linha-selecionada', tr.dataset.chave === selecionada);
+            });
         }
 
         function atualizarTudo() {
@@ -473,9 +920,13 @@
 
         function linha(execucao) {
             const tr = document.createElement('tr');
+            const marcada = execucao.chave === selecionada;
             const detalhe = (grupo) => `Passed: ${grupo.passed} | Failed: ${grupo.failed} | Skipped: ${grupo.skipped}`;
 
+            tr.dataset.chave = execucao.chave;
+            tr.classList.toggle('linha-selecionada', marcada);
             tr.innerHTML = `
+                <td class="col-selecao"><input type="radio" name="selecao-historico" value="${execucao.chave}" ${marcada ? 'checked' : ''} onchange="selecionarExecucao(this.value)" aria-label="Selecionar histórico de ${execucao.chave}"></td>
                 <td><b>${execucao.data}</b></td>
                 <td>${execucao.inicio}</td>
                 <td>${execucao.fim}</td>
@@ -494,25 +945,23 @@
 
         function filterData() {
             const tbody = document.getElementById('test-table-body');
-            const selecionada = document.getElementById('filter-execucao').value;
             const status = document.getElementById('filter-status').value;
             const busca = document.getElementById('search-input').value.toLowerCase().trim();
 
-            const filtradas = [...execucoes].reverse().filter(execucao => {
-                const matchExecucao = !selecionada || execucao.chave === selecionada;
+            const filtradas = execucoesOrdenadas().filter(execucao => {
                 const matchStatus = !status || execucao.status === status;
                 const matchBusca = !busca ||
                     execucao.data.toLowerCase().includes(busca) ||
                     execucao.inicio.toLowerCase().includes(busca) ||
                     execucao.chave.toLowerCase().includes(busca);
 
-                return matchExecucao && matchStatus && matchBusca;
+                return matchStatus && matchBusca;
             });
 
             tbody.innerHTML = '';
 
             if (!filtradas.length) {
-                tbody.innerHTML = `<tr><td colspan="11" class="sem-dados">Nenhuma execução registrada. Rode os testes e o relatório será atualizado automaticamente.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="12" class="sem-dados">Nenhuma execução registrada. Rode os testes e o relatório será atualizado automaticamente.</td></tr>`;
                 return;
             }
 

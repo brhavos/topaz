@@ -11,6 +11,8 @@ atraves de "config/leitor.py".
 
 Na aba DADOS_CADASTRO, o campo ssn pode ficar vazio: nesse caso um SSN
 exclusivo e gerado automaticamente dentro da faixa ssn_minimo/ssn_maximo.
+A coluna ativo (S/N) permite desligar um registro sem apagar a linha: os
+testes executam somente os registros marcados com S. Todos nascem com S.
 """
 
 import os
@@ -82,14 +84,22 @@ PARAMETROS = [
      "Posicao (a partir de 0) da conta de origem na lista do formulario"),
     ("TRANSFERENCIA", "indice_conta_destino", 1,
      "Posicao (a partir de 0) da conta de destino na lista do formulario"),
-    ("TRANSFERENCIA", "valor_transferencia", 25,
-     "Valor transferido entre as contas"),
+    ("TRANSFERENCIA", "quantidade_transferencias_validas", 10,
+     "Quantidade de transferencias validas executadas pelos testes"),
+    ("TRANSFERENCIA", "quantidade_transferencias_invalidas", 3,
+     "Quantidade de transferencias invalidas executadas pelos testes"),
+    ("TRANSFERENCIA", "valores_transferencia_validos", "10;15;20;25;30;35;40;45;50;55",
+     "Valores das transferencias validas da massa de testes, separados por ';'"),
+    ("TRANSFERENCIA", "valores_transferencia_invalidos", "vazio;abc;25,00",
+     "Valores invalidos de transferencia, separados por ';' (use 'vazio' para o campo em branco)"),
 
     # --------------------------------------------------------------- MENSAGENS
     ("MENSAGENS", "mensagem_boas_vindas", "Welcome",
      "Texto esperado na pagina apos o cadastro ser concluido"),
     ("MENSAGENS", "mensagem_transferencia_concluida", "Transfer Complete",
      "Texto aguardado no painel apos confirmar a transferencia"),
+    ("MENSAGENS", "mensagem_erro_transferencia", "Error",
+     "Texto exibido pelo sistema quando a transferencia e recusada"),
     ("MENSAGENS", "mensagens_sucesso_transferencia", "Transfer Complete;Successfully;Amount",
      "Textos aceitos como sucesso da transferencia, separados por ';'"),
 
@@ -99,15 +109,54 @@ PARAMETROS = [
 ]
 
 CABECALHO_CADASTRO = (
-    "PERFIL", "primeiro_nome", "sobrenome", "endereco", "cidade", "estado",
-    "cep", "telefone", "ssn", "senha", "prefixo_usuario",
+    "PERFIL", "tipo", "primeiro_nome", "sobrenome", "endereco", "cidade", "estado",
+    "cep", "telefone", "ssn", "senha", "prefixo_usuario", "erro_esperado", "ativo",
 )
 
-# PERFIL, nome, sobrenome, endereco, cidade, estado, cep, telefone, ssn, senha, prefixo
+# PERFIL, tipo, nome, sobrenome, endereco, cidade, estado, cep, telefone, ssn,
+# senha, prefixo, erro esperado (somente para os usuarios invalidos), ativo (S/N)
 DADOS_CADASTRO = [
-    ("CADASTRO", "Carlos", "Silva", "Rua Teste, 123", "Campinas", "SP", "13000", "19999999999", "", "Senha123@", "qa_"),
-    ("LOGIN", "Teste", "QA", "Rua A", "Campinas", "SP", "13000", "19999999999", "", "Password123", "lg_"),
-    ("TRANSFERENCIA", "Transfer", "User", "Rua B", "Campinas", "SP", "13000", "19999999999", "", "Password123", "tr_"),
+    # Perfis usados pelos cenarios de cadastro, login e transferencia
+    ("CADASTRO", "PERFIL", "Carlos Henrique", "Ciccolani", "Rua Teste, 123", "Campinas", "SP",
+     "13000", "19999999999", "", "Senha123@", "qa_", "", "S"),
+    ("LOGIN", "PERFIL", "Renata", "Almeida", "Rua A", "Campinas", "SP",
+     "13000", "19999999999", "", "Password123", "lg_", "", "S"),
+    ("TRANSFERENCIA", "PERFIL", "Marcos Vinícius", "Prado", "Rua B", "Campinas", "SP",
+     "13000", "19999999999", "", "Password123", "tr_", "", "S"),
+
+    # 10 usuarios validos: ssn vazio -> o teste gera um SSN exclusivo automaticamente
+    ("USR_VALIDO_01", "VALIDO", "Ana Beatriz", "Souza", "Rua das Palmeiras, 120", "Campinas", "SP",
+     "13045-100", "19991110001", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_02", "VALIDO", "Bruno", "Carvalho Lima", "Av. Andrade Neves, 455", "Campinas", "SP",
+     "13013-161", "19991110002", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_03", "VALIDO", "Camila", "Ferreira Dias", "Rua Júlia Lopes, 89", "Valinhos", "SP",
+     "13270-000", "19991110003", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_04", "VALIDO", "Daniel", "Almeida Rocha", "Rua do Comércio, 32", "Jundiaí", "SP",
+     "13200-000", "19991110004", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_05", "VALIDO", "Eduarda", "Martins Reis", "Av. Brasil, 1500", "Campinas", "SP",
+     "13010-000", "19991110005", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_06", "VALIDO", "Felipe", "Nogueira Prado", "Rua Aurora, 77", "Hortolândia", "SP",
+     "13184-000", "19991110006", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_07", "VALIDO", "Gabriela", "Rocha Mendes", "Rua das Acácias, 210", "Campinas", "SP",
+     "13045-200", "19991110007", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_08", "VALIDO", "Henrique", "Barbosa Silva", "Av. das Nações, 640", "Sumaré", "SP",
+     "13170-000", "19991110008", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_09", "VALIDO", "Isabela", "Prado Costa", "Rua Bela Vista, 15", "Campinas", "SP",
+     "13076-000", "19991110009", "", "Senha123@", "usr_", "", "S"),
+    ("USR_VALIDO_10", "VALIDO", "João Pedro", "Teixeira", "Rua São João, 303", "Paulínia", "SP",
+     "13140-000", "19991110010", "", "Senha123@", "usr_", "", "S"),
+
+    # 5 usuarios invalidos: nome de pessoa normal com um campo obrigatorio vazio
+    ("USR_INVALIDO_01", "INVALIDO", "Mariana", "Oliveira Santos", "", "Campinas", "SP",
+     "13045-300", "19991120001", "310001", "Senha123@", "inv_", "Address is required.", "S"),
+    ("USR_INVALIDO_02", "INVALIDO", "Pedro Henrique", "Alves", "Rua Ibirá, 88", "", "SP",
+     "13050-000", "19991120002", "310002", "Senha123@", "inv_", "City is required.", "S"),
+    ("USR_INVALIDO_03", "INVALIDO", "Larissa", "Gomes Ribeiro", "Rua das Orquídeas, 41", "Campinas", "",
+     "13060-000", "19991120003", "310003", "Senha123@", "inv_", "State is required.", "S"),
+    ("USR_INVALIDO_04", "INVALIDO", "Thiago", "Moreira Castro", "Av. dos Imigrantes, 512", "Valinhos", "SP",
+     "", "19991120004", "310004", "Senha123@", "inv_", "Zip Code is required.", "S"),
+    ("USR_INVALIDO_05", "INVALIDO", "Fernanda", "Lima Duarte", "Rua Alvorada, 76", "Campinas", "SP",
+     "13070-000", "19991120005", "", "Senha123@", "inv_", "Social Security Number is required.", "S"),
 ]
 
 INSTRUCOES = [
@@ -115,14 +164,20 @@ INSTRUCOES = [
     ("", ""),
     ("1)", "Abra a aba PARAMETROS e edite a coluna VALOR das chaves que deseja alterar."),
     ("2)", "Abra a aba DADOS_CADASTRO para alterar nomes, enderecos, senhas e prefixos de usuario."),
+    ("2.1)", "Tipo PERFIL: dados dos cenarios existentes. Tipo VALIDO: massa registrada nos testes (10 usuarios). Tipo INVALIDO: cadastros recusados (5 usuarios, erro_esperado obrigatorio)."),
+    ("2.2)", "Coluna ativo: use S para executar o registro e N para ignora-lo sem apagar a linha (padrao S)."),
     ("3)", "Salve a planilha e execute os testes normalmente (executa.bat ou o comando behave)."),
     ("", ""),
     ("OBSERVACOES", ""),
     ("-", "Nao renomeie as abas nem as chaves da coluna CHAVE: os testes localizam os valores por esses nomes."),
     ("-", "Na aba DADOS_CADASTRO, ssn vazio faz o teste gerar um SSN exclusivo automaticamente."),
+    ("-", "Somente registros com ativo = S entram na massa de usuarios; os com N sao ignorados sem precisar apagar a linha."),
     ("-", "O campo senha e o prefixo_usuario de cada perfil podem ser alterados livremente."),
     ("-", "Valores booleanos aceitam True/False (tambem Sim/Nao)."),
     ("-", "mensagens_sucesso_transferencia aceita varios textos separados por ';'."),
+    ("-", "quantidade_transferencias_validas e quantidade_transferencias_invalidas definem quantas transacoes executar (padrao 10 e 3)."),
+    ("-", "Se a quantidade for maior que a lista, os valores de transferencia sao repetidos ciclicamente."),
+    ("-", "Cada transacao e registrada em docs/log_transacoes.txt, com usuario, contas, valor, situacao e mensagem."),
     ("-", "Para recriar esta planilha com os valores de fabrica: python config/gerar_planilha.py --forcar"),
 ]
 
@@ -164,13 +219,14 @@ def gerar_planilha():
     for linha in DADOS_CADASTRO:
         aba_cadastro.append(linha)
     _estilizar_cabecalho(aba_cadastro, CABECALHO_CADASTRO)
-    _ajustar_larguras(aba_cadastro, (16, 15, 14, 18, 12, 8, 8, 14, 12, 16, 16))
+    _ajustar_larguras(aba_cadastro, (17, 10, 16, 18, 26, 14, 8, 11, 14, 12, 14, 14, 30, 8))
 
     aba_instrucoes = planilha.create_sheet("INSTRUCOES")
     for linha in INSTRUCOES:
         aba_instrucoes.append(linha)
-    aba_instrucoes["A1"].font = Font(bold=True, size=12)
-    aba_instrucoes["A7"].font = Font(bold=True)
+    for indice, linha in enumerate(INSTRUCOES, start=1):
+        if linha[0] in ("COMO ALTERAR OS PARAMETROS DE TESTE", "OBSERVACOES"):
+            aba_instrucoes.cell(row=indice, column=1).font = Font(bold=True, size=12)
     _ajustar_larguras(aba_instrucoes, (6, 100))
 
     planilha.save(CAMINHO_PLANILHA)

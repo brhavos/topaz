@@ -7,8 +7,15 @@ da coluna VALOR e executar os testes normalmente (behave / executa.bat).
 
 Estrutura da planilha:
   - Aba PARAMETROS.....: SECAO | CHAVE | VALOR | DESCRICAO
-  - Aba DADOS_CADASTRO.: PERFIL | primeiro_nome | sobrenome | endereco | cidade
+  - Aba DADOS_CADASTRO.: PERFIL | tipo | primeiro_nome | sobrenome | endereco | cidade
                          | estado | cep | telefone | ssn | senha | prefixo_usuario
+                         | erro_esperado | ativo
+
+O campo tipo separa os perfis usados pelos cenarios existentes (PERFIL) da
+massa de dados dos testes de cadastro (VALIDO / INVALIDO). Em erro_esperado
+fica a mensagem que o sistema deve exibir para o usuario invalido. A coluna
+ativo (S/N) desliga um registro sem apagar a linha: a massa usa apenas os
+registros marcados com S (coluna ausente = todos ativos).
 """
 
 import os
@@ -32,6 +39,7 @@ VERDADEIROS = {"true", "1", "sim", "s", "yes", "verdadeiro"}
 # Nome da coluna na aba DADOS_CADASTRO -> chave usada internamente
 COLUNAS_CADASTRO = {
     "perfil": "perfil",
+    "tipo": "tipo",
     "primeiro_nome": "first",
     "sobrenome": "last",
     "endereco": "address",
@@ -42,6 +50,8 @@ COLUNAS_CADASTRO = {
     "ssn": "ssn",
     "senha": "senha",
     "prefixo_usuario": "prefixo_usuario",
+    "erro_esperado": "erro_esperado",
+    "ativo": "ativo",
 }
 
 
@@ -54,6 +64,13 @@ def _para_texto(valor):
     if isinstance(valor, float) and valor.is_integer():
         return str(int(valor))
     return str(valor).strip()
+
+
+def _registro_ativo(dados):
+    """True quando a coluna ativo esta marcada com S (ou quando a coluna nao existe)."""
+    if "ativo" not in dados:
+        return True
+    return _para_texto(dados.get("ativo")).lower() in VERDADEIROS
 
 
 class Parametros:
@@ -143,6 +160,20 @@ class Parametros:
         """Lista de valores separados por ';' (usada para mensagens esperadas)."""
         return [item for item in (parte.strip() for parte in self.texto(chave).split(separador)) if item]
 
+    def sequencia(self, chave, quantidade):
+        """Valores da chave repetidos ciclicamente até atingir a quantidade.
+
+        Permite configurar apenas a quantidade de transacoes na planilha sem
+        precisar repetir manualmente os valores da lista.
+        """
+        quantidade = int(quantidade)
+        if quantidade <= 0:
+            raise ValueError(f"A quantidade de '{chave}' deve ser maior que zero.")
+        valores = self.lista(chave)
+        if not valores:
+            raise ValueError(f"Nenhum valor configurado em '{chave}'.")
+        return [valores[indice % len(valores)] for indice in range(quantidade)]
+
     # ----------------------------------------------------------- dados de teste
     def dados_cadastro(self, perfil):
         """Dados cadastrais do perfil informado (aba DADOS_CADASTRO)."""
@@ -153,6 +184,25 @@ class Parametros:
                 f"da planilha '{self.caminho}'."
             )
         return dict(self._cadastro[perfil])
+
+    def usuarios(self, tipo=None):
+        """Registros ativos da aba DADOS_CADASTRO, opcionalmente filtrados por tipo.
+
+        Devolve uma lista (na ordem da planilha) de dicionarios com as chaves
+        internas e com "perfil" preenchido. Registros com ativo diferente de S
+        ficam de fora; sem filtro de tipo, inclui todos os tipos.
+        """
+        tipo = _para_texto(tipo).upper()
+        registros = []
+        for perfil, dados in self._cadastro.items():
+            if not _registro_ativo(dados):
+                continue
+            if tipo and _para_texto(dados.get("tipo")).upper() != tipo:
+                continue
+            registro = dict(dados)
+            registro["perfil"] = perfil
+            registros.append(registro)
+        return registros
 
     def novo_usuario(self, prefixo=""):
         """Usuario exclusivo: prefixo do perfil + sufixo aleatorio de tamanho configuravel."""
@@ -168,9 +218,17 @@ class Parametros:
         dados = self.dados_cadastro(perfil)
         return self.novo_usuario(dados.get("prefixo_usuario")), _para_texto(dados.get("senha"))
 
-    def formulario(self, perfil, username):
-        """Argumentos nomeados esperados por RegisterPage.fill_register_form."""
+    def formulario(self, perfil, username, confirmar=None, gerar_ssn=True):
+        """Argumentos nomeados esperados por RegisterPage.fill_register_form.
+
+        gerar_ssn=False mantem o SSN vazio quando a planilha nao informa um:
+        e assim que os usuarios invalidos validam a exigencia do campo.
+        """
         dados = self.dados_cadastro(perfil)
+        senha = _para_texto(dados.get("senha"))
+        ssn = _para_texto(dados.get("ssn"))
+        if not ssn and gerar_ssn:
+            ssn = self.gerar_ssn()
         return {
             "first": _para_texto(dados.get("first")),
             "last": _para_texto(dados.get("last")),
@@ -179,9 +237,10 @@ class Parametros:
             "state": _para_texto(dados.get("state")),
             "zip_code": _para_texto(dados.get("zip_code")),
             "phone": _para_texto(dados.get("phone")),
-            "ssn": _para_texto(dados.get("ssn")) or self.gerar_ssn(),
+            "ssn": ssn,
             "username": username,
-            "password": _para_texto(dados.get("senha")),
+            "password": senha,
+            "confirm": senha if confirmar is None else _para_texto(confirmar),
         }
 
 

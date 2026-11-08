@@ -2,7 +2,7 @@
 Relatório HTML do histórico de testes ("docs/docs_historico_testes.html").
 
 O relatório é atualizado automaticamente no fim de cada execução: os dados são
-lidos de "docs/log.xlsx" (as MAX_HISTORICOS execuções mais recentes) e embutidos
+lidos de "docs/log.xlsx" (todas as execuções registradas) e embutidos
 no próprio HTML, dentro dos marcadores DADOS-INICIO / DADOS-FIM.
 
 Embutir os dados (em vez de o navegador abrir a planilha) faz o relatório

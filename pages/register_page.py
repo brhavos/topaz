@@ -38,7 +38,10 @@ class RegisterPage(BasePage):
             element.send_keys(char)
             time.sleep(random.uniform(intervalo_min, intervalo_max))
 
-    def fill_register_form(self, first, last, address, city, state, zip_code, phone, ssn, username, password):
+    def fill_register_form(self, first, last, address, city, state, zip_code, phone, ssn, username, password, confirm=None):
+        """Preenche o formulario. confirm permite informar uma confirmacao diferente da senha."""
+        if confirm is None:
+            confirm = password
         self._human_type(self.FIRST_NAME_INPUT, first)
         self._human_type(self.LAST_NAME_INPUT, last)
         self._human_type(self.ADDRESS_INPUT, address)
@@ -49,7 +52,7 @@ class RegisterPage(BasePage):
         self._human_type(self.SSN_INPUT, ssn)
         self._human_type(self.USERNAME_INPUT, username)
         self._human_type(self.PASSWORD_INPUT, password)
-        self._human_type(self.CONFIRM_INPUT, password)
+        self._human_type(self.CONFIRM_INPUT, confirm)
 
     def submit_register(self):
         time.sleep(parametros.decimal("pausa_curta"))

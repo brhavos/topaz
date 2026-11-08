@@ -56,7 +56,7 @@ def after_all(context):
     if hasattr(context, 'driver'):
         context.driver.quit()
 
-    # Grava a execução em docs/log.xlsx (mantém as 5 mais recentes).
+    # Grava a execução em docs/log.xlsx (sem limite, do mais recente para o mais antigo).
     historico = getattr(context, 'historico', None)
     if historico is not None and not getattr(context.config, 'dry_run', False):
         historico.gravar()

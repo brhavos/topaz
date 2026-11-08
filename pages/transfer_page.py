@@ -76,7 +76,26 @@ class TransferPage(BasePage):
         from_dropdown.select_by_index(parametros.inteiro("indice_conta_origem"))
         to_dropdown.select_by_index(parametros.inteiro("indice_conta_destino"))
 
+        # Guarda as contas escolhidas antes do envio (a página é recarregada ao clicar).
+        origem = from_dropdown.first_selected_option.get_attribute("value")
+        destino = to_dropdown.first_selected_option.get_attribute("value")
+
         self.click(self.TRANSFER_BUTTON)
+        return origem, destino
+
+    def get_panel_text(self):
+        """Texto atual do painel de resultado (com ou sem sucesso)."""
+        return self.safe_text(self.SUCCESS_MESSAGE)
+
+    def aguardar_resultado(self, texto):
+        """Aguarda o texto aparecer no painel e devolve o conteúdo exibido."""
+        try:
+            WebDriverWait(self.driver, self.timeout).until(
+                lambda _driver: texto.lower() in self.safe_text(self.SUCCESS_MESSAGE).lower()
+            )
+        except TimeoutException:
+            pass
+        return self.get_panel_text()
 
     def get_success_message(self):
         """Aguarda e retorna o texto do painel direito após a transferência."""

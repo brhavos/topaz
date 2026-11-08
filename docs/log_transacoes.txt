@@ -1,0 +1,568 @@
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 08/11/2026 09:33:01
+==============================================================================
+
+[1] 08/11/2026 09:33:01 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[2] 08/11/2026 09:33:03 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[3] 08/11/2026 09:33:05 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 20
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $20.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[4] 08/11/2026 09:33:07 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 25
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $25.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[5] 08/11/2026 09:33:09 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 30
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $30.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[6] 08/11/2026 09:33:11 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 35
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $35.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[7] 08/11/2026 09:33:12 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 40
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $40.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[8] 08/11/2026 09:33:14 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 45
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $45.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[9] 08/11/2026 09:33:16 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 50
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $50.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[10] 08/11/2026 09:33:18 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_89ce09110
+    Conta origem....: 13677
+    Conta destino...: 13788
+    Valor solicitado: 55
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $55.00 has been transferred from account #13677 to account #13788. See Account Activity for more details.
+
+[11] 08/11/2026 09:33:33 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_ede6e338b
+    Conta origem....: 13899
+    Conta destino...: 14010
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[12] 08/11/2026 09:33:35 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_ede6e338b
+    Conta origem....: 13899
+    Conta destino...: 14010
+    Valor solicitado: abc
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[13] 08/11/2026 09:33:37 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_ede6e338b
+    Conta origem....: 13899
+    Conta destino...: 14010
+    Valor solicitado: 25,00
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 08/11/2026 09:44:21
+==============================================================================
+
+[1] 08/11/2026 09:44:21 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[2] 08/11/2026 09:44:23 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[3] 08/11/2026 09:44:24 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 20
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $20.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[4] 08/11/2026 09:44:26 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 25
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $25.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[5] 08/11/2026 09:44:28 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 30
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $30.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[6] 08/11/2026 09:44:29 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 35
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $35.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[7] 08/11/2026 09:44:31 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 40
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $40.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[8] 08/11/2026 09:44:33 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 45
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $45.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[9] 08/11/2026 09:44:35 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 50
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $50.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[10] 08/11/2026 09:44:37 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_d3b5fba31
+    Conta origem....: 14343
+    Conta destino...: 14454
+    Valor solicitado: 55
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $55.00 has been transferred from account #14343 to account #14454. See Account Activity for more details.
+
+[11] 08/11/2026 09:44:53 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_8bc5957fc
+    Conta origem....: 14898
+    Conta destino...: 15009
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[12] 08/11/2026 09:44:54 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_8bc5957fc
+    Conta origem....: 14898
+    Conta destino...: 15009
+    Valor solicitado: abc
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[13] 08/11/2026 09:44:56 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_8bc5957fc
+    Conta origem....: 14898
+    Conta destino...: 15009
+    Valor solicitado: 25,00
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 08/11/2026 09:50:31
+==============================================================================
+
+[1] 08/11/2026 09:50:31 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[2] 08/11/2026 09:50:32 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[3] 08/11/2026 09:50:34 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 20
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $20.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[4] 08/11/2026 09:50:36 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 25
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $25.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[5] 08/11/2026 09:50:38 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 30
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $30.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[6] 08/11/2026 09:50:40 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 35
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $35.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[7] 08/11/2026 09:50:42 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 40
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $40.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[8] 08/11/2026 09:50:43 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 45
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $45.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[9] 08/11/2026 09:50:45 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 50
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $50.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[10] 08/11/2026 09:50:47 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_23fecc768
+    Conta origem....: 19782
+    Conta destino...: 19893
+    Valor solicitado: 55
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $55.00 has been transferred from account #19782 to account #19893. See Account Activity for more details.
+
+[11] 08/11/2026 09:51:03 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_a9af4db6d
+    Conta origem....: 20115
+    Conta destino...: 20226
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[12] 08/11/2026 09:51:04 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_a9af4db6d
+    Conta origem....: 20115
+    Conta destino...: 20226
+    Valor solicitado: abc
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[13] 08/11/2026 09:51:06 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_a9af4db6d
+    Conta origem....: 20115
+    Conta destino...: 20226
+    Valor solicitado: 25,00
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 08/11/2026 11:02:56
+==============================================================================
+
+[1] 08/11/2026 11:02:56 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[2] 08/11/2026 11:02:58 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[3] 08/11/2026 11:02:59 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 20
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $20.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[4] 08/11/2026 11:03:01 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 25
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $25.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[5] 08/11/2026 11:03:03 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 30
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $30.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[6] 08/11/2026 11:03:05 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 35
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $35.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[7] 08/11/2026 11:03:07 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 40
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $40.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[8] 08/11/2026 11:03:09 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 45
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $45.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[9] 08/11/2026 11:03:10 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 50
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $50.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[10] 08/11/2026 11:03:12 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_05106b38e
+    Conta origem....: 13788
+    Conta destino...: 13899
+    Valor solicitado: 55
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $55.00 has been transferred from account #13788 to account #13899. See Account Activity for more details.
+
+[11] 08/11/2026 11:03:27 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_55a30d303
+    Conta origem....: 14010
+    Conta destino...: 14121
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[12] 08/11/2026 11:03:29 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_55a30d303
+    Conta origem....: 14010
+    Conta destino...: 14121
+    Valor solicitado: abc
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[13] 08/11/2026 11:03:31 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_55a30d303
+    Conta origem....: 14010
+    Conta destino...: 14121
+    Valor solicitado: 25,00
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 08/11/2026 11:14:04
+==============================================================================
+
+[1] 08/11/2026 11:14:04 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[2] 08/11/2026 11:14:06 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[3] 08/11/2026 11:14:07 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 20
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $20.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[4] 08/11/2026 11:14:09 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 25
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $25.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[5] 08/11/2026 11:14:11 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 30
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $30.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[6] 08/11/2026 11:14:13 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 35
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $35.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[7] 08/11/2026 11:14:15 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 40
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $40.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[8] 08/11/2026 11:14:16 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 45
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $45.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[9] 08/11/2026 11:14:18 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 50
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $50.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[10] 08/11/2026 11:14:20 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_db45bd236
+    Conta origem....: 15564
+    Conta destino...: 15675
+    Valor solicitado: 55
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $55.00 has been transferred from account #15564 to account #15675. See Account Activity for more details.
+
+[11] 08/11/2026 11:14:36 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_538137163
+    Conta origem....: 15786
+    Conta destino...: 15897
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[12] 08/11/2026 11:14:37 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_538137163
+    Conta origem....: 15786
+    Conta destino...: 15897
+    Valor solicitado: abc
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+
+[13] 08/11/2026 11:14:39 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_538137163
+    Conta origem....: 15786
+    Conta destino...: 15897
+    Valor solicitado: 25,00
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 08/11/2026 11:17:05
+==============================================================================
+
+[1] 08/11/2026 11:17:04 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_781b0d079
+    Conta origem....: 16563
+    Conta destino...: 16674
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #16563 to account #16674. See Account Activity for more details.
+
+[2] 08/11/2026 11:17:06 - TRANSAÇÃO VÁLIDA
+    Usuário.........: tr_781b0d079
+    Conta origem....: 16563
+    Conta destino...: 16674
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #16563 to account #16674. See Account Activity for more details.
+
+[3] 08/11/2026 11:17:21 - TRANSAÇÃO INVÁLIDA
+    Usuário.........: tr_a2fe5dbaa
+    Conta origem....: 16785
+    Conta destino...: 16896
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
