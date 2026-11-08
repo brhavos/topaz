@@ -1,6 +1,6 @@
 #------------------------------------------
 # ARQUIVO.........: README.TXT
-# FINALIDADE......: FORNECER AS ORIENTAÇÕES PARA A EXECUÇÃO DO PROJETO E DOLEITURA DAS EVIDÊNCIAS
+# FINALIDADE......: FORNECER AS ORIENTAÇÕES PARA A EXECUÇÃO DO PROJETO DE AUTOMAÇÃO DE TESTES
 # AUTOR...........: CARLOS HENRIQUE CICCOLANI
 # CRIAÇÃO.........: 06/11/26
 # ÚLTIMA ALTERAÇÃO: 08/11/26
@@ -33,7 +33,7 @@
 			- Se for um usuário técnico da nossa área, sugiro a opção "2".
 	
 	Opção-1:
-        a-) Acesse a seguinte url: https://github.com/brhavos/topaz.git;
+	a-) Acesse a seguinte url: https://github.com/brhavos/topaz.git;
 	b-) Na tela que abrir, clique no botão verde, chamado "Code" e escolha a opção "download ZIP";
 	c-) Descompacte o arquivo no local que desejar;
 	d-) Vá no local onde o arquivo ZIP foi descompactado;
@@ -42,16 +42,16 @@
 		Obs.: haverá instalações dos recursos necessários automaticamente.
 
 	Opção-2:
-        a-) Acesse a seguinte url: https://github.com/brhavos/topaz.git;
+	a-) Acesse a seguinte url: https://github.com/brhavos/topaz.git;
 	b-) Na tela que abrir, clique no botão verde, chamado "Code" e escolha a opção "download ZIP";
 	c-) Descompacte o arquivo no local que desejar;
 	d-) Abra o VsCode;
-        e-) No VsCode, abra a pasta onde foi feita a descompactação;
-        f-) No Vscode, abra uma sessão do terminal;
+	e-) No VsCode, abra a pasta onde foi feita a descompactação;
+	f-) No Vscode, abra uma sessão do terminal;
 	g-) Cria o ambiente virtual, digitando o seguinte comando: python -m venv venv;
 	h-) Ativa o ambiente virtual, digitando o seguinte comando: venv\Scripts\activate;
 	i-) Instala as dependências (selenium e behave), digitando o seguinte comando: pip install -r requirements.txt;
-        j-) Executa o teste utilizando o seguinte comando: "behave" (sem as aspas).
+	j-) Executa o teste utilizando o seguinte comando: "behave" (sem as aspas).
 
 # 2-) EVIDÊNCIAS
 
@@ -66,7 +66,7 @@
     Para garantir o reúso dos artefatos, criei uma parametrização.
     Todos os parâmetros dos testes ficam na planilha "config\parametros.xlsx".
     Para alterar qualquer valor, basta editar a planilha e executar os testes normalmente.
-	* Se desejar alterar, faça com prudência e somente depois de ler as instruções, que estão
+		* Se desejar alterar, faça com prudência e somente depois de ler as instruções, que estão
 	contidas na aba "instrucoes" da própria planilha.
 	SUGIRO FORTEMENTE QUE ANTES DE ALTERAR, EXECUTE PELO MENOS UMA VEZ O TESTE NA FORMA ORIGINAL.
 
