@@ -1,19 +1,19 @@
 #------------------------------------------
-ARQUIVO.........: README.TXT
-FINALIDADE......: FORNECER AS ORIENTAÇÕES PARA A EXECUÇÃO DO PROJETO E DOLEITURA DAS EVIDÊNCIAS
-AUTOR...........: CARLOS HENRIQUE CICCOLANI
-CRIAÇÃO.........: 06/11/26
-ÚLTIMA ALTERAÇÃO: 07/11/26
+# ARQUIVO.........: README.TXT
+# FINALIDADE......: FORNECER AS ORIENTAÇÕES PARA A EXECUÇÃO DO PROJETO E DOLEITURA DAS EVIDÊNCIAS
+# AUTOR...........: CARLOS HENRIQUE CICCOLANI
+# CRIAÇÃO.........: 06/11/26
+# ÚLTIMA ALTERAÇÃO: 08/11/26
 #------------------------------------------
 
-# PARÂMETROS:
+# PARÂMETROS DO PROJETO:
 
 	TECNOLOGIA APLICADA:
-		PYTHON;
-		BEHAVE.
+		Linguagem = PYTHON;
+		Framework BDD: BEHAVE.
 
 	INTERAÇÃO COM O NAVEGADOR:
-		SELENIUM.
+		IDE de automação = SELENIUM.
 
 # 1-) INSTRUÇÕES PARA O FUNCIONAMENTO
 
@@ -23,24 +23,31 @@ CRIAÇÃO.........: 06/11/26
 		- behave.
 
 	Criei 2 opções para a execução dos testes.
-	- Se a máquina que for executar não possuir os requisitos mencionados, recomendo a opção 1.
-	- Se a máquina que for executar possuir os requisitos mencionados, tanto faz, 1 ou 2.
+	- Se a máquina que for executar não possuir os pré-requisitos mencionados, recomendo a opção "1";
+	- Se a máquina que for executar possuir os requisitos mencionados, tanto faz, "1" ou "2";
+	- Se for um usuário técnico da nossa área, sugiro a opção "2".
 	
-
     Passos a serem seguidos:
 
 	Opção-1:
-        a-) Baixe todo o conteúdo do repositório GIT numa pasta no seu computador;
-	b-) Dê um duplo-clique no arquivo "executa.bat".
+        a-) Acesse a seguinte url: url: https://github.com/brhavos/topaz.git;
+		b-) Na tela que abrir, clique no botão verde, chamado "Code" e escolha a opção "download ZIP";
+		c-) Descompacte o arquivo no local que desejar;
+		d-) vá no local onde descompactou;
+		e-) Localiza o arquivo "executa.bat", que está na raiz do projeto.
+		f-) Dê um duplo-clique no arquivo "executa.bat" e aguarda o término do teste.
 
 	Opção-2:
-        b-) Abra o VsCode;
-        c-) No VsCode, abra a pasta "topaz2";
-        d-) No Vscode, abra uma sessão do terminal;
-	e-) Criando ambiente virtual: python -m venv venv
-	f-) Ativação do ambiente virtual: venv\Scripts\activate
-	g-) Instalação das dependências (selenium e behave): pip install -r requirements.txt
-        h-) Execução dos testeste o seguinte comando: "behave" (sem as aspas).
+        a-) Acesse a seguinte url: url: https://github.com/brhavos/topaz.git;
+		b-) Na tela que abrir, clique no botão verde, chamado "Code" e escolha a opção "download ZIP";
+		c-) Descompacte o arquivo no local que desejar;
+		b-) Abra o VsCode;
+        e-) No VsCode, abra a pasta onde você fez a descompactação;
+        f-) No Vscode, abra uma sessão do terminal;
+		g-) Cria o ambiente virtual, digitando o seguinte comando: python -m venv venv;
+		h-) Ativa o ambiente virtual, digitando o seguinte comando: venv\Scripts\activate;
+		i-) Instala as dependências (selenium e behave), digitando o seguinte comando: pip install -r requirements.txt;
+        j-) Executa o teste utilizando o seguinte comando: "behave" (sem as aspas).
 
 # 2-) EVIDÊNCIAS
 
@@ -50,10 +57,14 @@ CRIAÇÃO.........: 06/11/26
     Para dar fé nas imagens dos testes, criei um vídeo demonstrativo.
     Ele foi colocado na pasta "docs" e o seu nome é "evidencia_completa.mp4".
 
-# 3-) PARÂMETROS DE TESTE (PLANILHA)\r
+# 3-) PARÂMETROS DE TESTE (PLANILHA)
 
+	Para garantir o reúso dos artefatos, criei uma parametrização.
     Todos os parâmetros dos testes ficam na planilha "config\parametros.xlsx".
     Para alterar qualquer valor, basta editar a planilha e executar os testes normalmente.
+	Se desejar alterar, faça com prudência e somente depois de ler as instruções, que estão
+	contidas na aba "instrucoes" da própria planilha.
+	SUGIRO FORTEMENTE QUE ANTES DE ALTERAR, EXECUTE PELO MENOS UMA VEZ O TESTE NA FORMA ORIGINAL.
 
     Abas da planilha:
 
@@ -64,11 +75,11 @@ CRIAÇÃO.........: 06/11/26
 	- DADOS_CADASTRO..: PERFIL | tipo | primeiro_nome | sobrenome | endereco | cidade | estado
 	                    | cep | telefone | ssn | senha | prefixo_usuario | erro_esperado | ativo
 	                    Tipo PERFIL: um perfil por cenário (CADASTRO, LOGIN e TRANSFERENCIA).
-	                    Tipo VALIDO: 10 usuários registrados pela massa de testes.
-	                    Tipo INVALIDO: 5 usuários recusados; erro_esperado indica a mensagem exigida.
-	                    Deixando o campo ssn vazio, o teste gera um SSN exclusivo automaticamente.
-	                    Coluna ativo: S executa o registro e N o ignora sem apagar a linha (padrão S).
-	- INSTRUCOES......: lembrete de como editar a planilha.
+	                    Tipo VALIDO: usuários registrados pela massa de testes.
+	                    Tipo INVALIDO: usuários recusados; erro_esperado indica a mensagem exigida.
+	                    Deixando o campo "SSN" vazio, o teste gera um "SSN" exclusivo automaticamente.
+	                    Coluna ativo: "S" executa o registro e "N" o ignora sem apagar a linha.
+	- INSTRUCOES......: ensina como editar a planilha.
 
     Observações:
 	- Não renomeie as abas nem a coluna CHAVE: os testes localizam os valores por esses nomes.
@@ -77,10 +88,26 @@ CRIAÇÃO.........: 06/11/26
 	  ativo = S; os marcados com N são ignorados, sem precisar apagar a linha.
 	- mensagens_sucesso_transferencia aceita vários textos separados por ";".
 	- quantidade_transferencias_validas e quantidade_transferencias_invalidas
-	  definem quantas transferências executar (padrão 10 e 3). Quando a quantidade
+	  definem quantas transferências executar. Quando a quantidade
 	  supera a lista de valores, os valores são repetidos ciclicamente.
 	- Cada transação executada é registrada em "docs/log_transacoes.txt", com
 	  data/hora, usuário, contas, valor, situação e mensagem.
 	- A planilha é lida pelo arquivo "config/leitor.py".
 	- Para recriar a planilha com os valores de fábrica: python config\gerar_planilha.py --forcar
 
+# 4-) OBSERVABILIDADE
+
+    a-) Visualização das métricas das execuções dos testes.
+		Toda vez que um teste termina, um painel em HTML é exibido (com base na planilha 
+		"log.xlsx", situada na pasta "docs", que é alimentada dinamicamente, durante a execução
+		de cada teste);
+		Por ser um arquivo HTML, o mesmo pode ser levado às reuniões syncs gerenciais ou diretoria.
+	b-) Log de transações
+		Toda transação é registrana no arquivo "log_transacoes.txt", situado na pasta "docs".
+		Esse log pode ter uma variedade utilizações (por exemplo; análises c/ power-bi).
+
+# 5-) ANÁLISE DO PROJETO
+	Toda a análise do projeto, escrita dos cenários BDD, mapeamento dos steps, tecnologias e 
+	relatos de intercorrências relevantes estão no arquivo "analise.doc", situado na pasta "docs".
+
+---(fim desse documento)---
