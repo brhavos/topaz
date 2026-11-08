@@ -22,13 +22,16 @@
 		- selenium;
 		- behave.
 
-	Criei 2 opções para a execução dos testes.
-	- Se a máquina que for executar não possuir os pré-requisitos mencionados, recomendo a opção "1";
-	- Se a máquina que for executar possuir os requisitos mencionados, tanto faz, "1" ou "2";
-	- Se for um usuário técnico da nossa área, sugiro a opção "2".
-	
-    Passos a serem seguidos:
+	Caso a estação que for executar os testes não possua esses recursos, eles serão instalados
+	automatica e silenciosamente, conforme a opção de utilização escolhida.
 
+	Opções de execução:
+		Criei 2 opções para a execução dos testes.
+			- Se a máquina que for executar não possuir os pré-requisitos mencionados, recomendo a opção "1";
+				Observação: os recursos serão instalados automaticamente.
+			- Se a máquina que for executar possuir os requisitos mencionados, tanto faz, opção "1" ou "2";
+			- Se for um usuário técnico da nossa área, sugiro a opção "2".
+	
 	Opção-1:
         a-) Acesse a seguinte url: url: https://github.com/brhavos/topaz.git;
 		b-) Na tela que abrir, clique no botão verde, chamado "Code" e escolha a opção "download ZIP";
@@ -36,6 +39,7 @@
 		d-) vá no local onde descompactou;
 		e-) Localiza o arquivo "executa.bat", que está na raiz do projeto.
 		f-) Dê um duplo-clique no arquivo "executa.bat" e aguarda o término do teste.
+			Obs.: haverá instalações dos recursos necessários automaticamente.
 
 	Opção-2:
         a-) Acesse a seguinte url: url: https://github.com/brhavos/topaz.git;
@@ -54,7 +58,7 @@
     As imagens das evidências encontram-se na pasta "evidencias", do projeto.
     	* Toda vez que o teste automatizado é executado, elas são atualizadas (sobrepostas) automaticamente.
 
-    Para dar fé nas imagens dos testes, criei um vídeo demonstrativo.
+    Para dar fé na eficácia da solução, criei um vídeo demonstrativo.
     Ele foi colocado na pasta "docs" e o seu nome é "evidencia_completa.mp4".
 
 # 3-) PARÂMETROS DE TESTE (PLANILHA)
@@ -110,4 +114,4 @@
 	Toda a análise do projeto, escrita dos cenários BDD, mapeamento dos steps, tecnologias e 
 	relatos de intercorrências relevantes estão no arquivo "analise.doc", situado na pasta "docs".
 
----(fim desse documento)---
+---(fim deste documento)---
