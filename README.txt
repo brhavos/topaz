@@ -53,6 +53,22 @@
 	i-) Instala as dependências (selenium e behave), digitando o seguinte comando: pip install -r requirements.txt;
 	j-) Executa o teste utilizando o seguinte comando: "behave" (sem as aspas).
 
+	Espera pela verificação de humanidade do Cloudflare:
+		Quando o Cloudflare exibe o desafio anti-bot, o teste para e escreve na hora,
+		no console, uma mensagem avisando que está aguardando a validação.
+		- Não há confirmação a dar: basta marcar "Confirme que é humano" na janela do
+		  navegador controlada pelo Selenium;
+		- O teste espera o prazo da chave "espera_verificacao_humana" (aba PARAMETROS,
+		  secao TEMPOS; padrao 5s); assim que a página liberar, ele retoma sozinho de
+		  onde parou;
+		- Se a verificação não for concluída nesse prazo, o teste falha, com a mensagem
+		  "A página não liberou dentro de 5s (desafio do Cloudflare)";
+		- Se o envio for interrompido e o formulário voltar vazio, o teste avisa, espera
+		  o mesmo prazo e preenche/envia o cadastro novamente, até 2 tentativas.
+		- A tela do momento da pausa (URL, título, iframes e texto) fica registrada em
+		  "docs/diagnostico_pausa.txt" e aparece no próprio console.
+		Por isso, execute os testes com a janela do navegador visível (navegador_headless = N).
+
 # 2-) EVIDÊNCIAS
 
     As imagens das evidências encontram-se na pasta "evidencias", do projeto.
@@ -103,7 +119,8 @@
 	  definem quantas transferências executar. Quando a quantidade
 	  supera a lista de valores, os valores são repetidos ciclicamente.
 	- Cada transação executada é registrada em "docs/log_transacoes.txt", com
-	  data/hora, usuário, contas, valor, situação e mensagem.
+	  data/hora, nome do cenário BDD, nome do step, usuário, contas, valor,
+	  situação, mensagem e comentários.
 	- A planilha é lida pelo arquivo "config/leitor.py".
 	- Para recriar a planilha com os valores de fábrica: python config\gerar_planilha.py --forcar
 
@@ -117,6 +134,10 @@
 	b-) Log de transações:
 		Toda transação é registrada no arquivo "log_transacoes.txt", situado na pasta "docs".
 		Esse log pode ter uma variedade de utilizações (por exemplo, análises/métricas c/ power-bi).
+		Cada registro traz, além dos dados da operação, o nome do cenário BDD e o nome do
+		step que originaram a transação. O campo "Comentários" vale "N/A" quando a
+		transferência é concluída e, quando é recusada, descreve em linguagem amigável o
+		problema ocorrido, as possíveis causas e as sugestões de solução.
 
 # 5-) ANÁLISE DO PROJETO
 	Toda a análise do projeto, escrita dos cenários BDD, mapeamento dos steps, tecnologias e 

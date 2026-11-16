@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from pages.base_page import BasePage
 from config.leitor import parametros
@@ -23,40 +23,44 @@ class TransferPage(BasePage):
     TO_ACCOUNT_OPTIONS = (By.CSS_SELECTOR, "#toAccountId option")
 
     def open(self):
-        self.driver.get(self.URL)
+        self.abrir(self.URL)
 
     def _new_account_number(self):
         """Número da conta recém-criada, ou None enquanto ainda não estiver disponível."""
-        for element in self.driver.find_elements(*self.NEW_ACCOUNT_ID):
-            try:
-                if element.is_displayed() and element.text.strip():
-                    return element.text.strip()
-            except StaleElementReferenceException:
-                return None
+        with self._sem_espera_implicita():
+            for element in self.driver.find_elements(*self.NEW_ACCOUNT_ID):
+                try:
+                    if element.is_displayed() and element.text.strip():
+                        return element.text.strip()
+                except StaleElementReferenceException:
+                    return None
         return None
 
     def _wait_for_accounts(self):
         """As contas são carregadas via AJAX; aguarda até os selects estarem preenchidos."""
-        WebDriverWait(self.driver, self.timeout).until(
+        self._esperar(
             lambda driver: len(driver.find_elements(*self.FROM_ACCOUNT_OPTIONS)) > 0
-            and len(driver.find_elements(*self.TO_ACCOUNT_OPTIONS)) > 0
+            and len(driver.find_elements(*self.TO_ACCOUNT_OPTIONS)) > 0,
+            "contas carregadas nos selects",
         )
 
     def open_new_account(self, account_type=None):
         """Abre uma conta adicional para o cliente logado (necessária para transferir entre contas)."""
         if account_type is None:
             account_type = parametros.texto("tipo_conta_nova")
-        self.driver.get(self.OPEN_ACCOUNT_URL)
+        self.abrir(self.OPEN_ACCOUNT_URL)
         # O botão só submete depois de o AJAX preencher o select de contas de origem
-        WebDriverWait(self.driver, self.timeout).until(
-            lambda driver: len(driver.find_elements(*self.FROM_ACCOUNT_OPTIONS)) > 0
+        self._esperar(
+            lambda driver: len(driver.find_elements(*self.FROM_ACCOUNT_OPTIONS)) > 0,
+            "contas carregadas no select de origem",
         )
         Select(self.find_element(self.ACCOUNT_TYPE_SELECT)).select_by_visible_text(account_type)
         self.click(self.OPEN_ACCOUNT_BUTTON)
         # #newAccountId já existe (vazio e oculto) no formulário, por isso esperamos pelo número preenchido
         try:
-            WebDriverWait(self.driver, self.timeout).until(
-                lambda _driver: self._new_account_number() is not None
+            self._esperar(
+                lambda _driver: self._new_account_number() is not None,
+                "número da nova conta",
             )
         except TimeoutException:
             raise AssertionError(
@@ -87,23 +91,27 @@ class TransferPage(BasePage):
         """Texto atual do painel de resultado (com ou sem sucesso)."""
         return self.safe_text(self.SUCCESS_MESSAGE)
 
+    def _painel_contem(self, texto):
+        """Aguarda o texto aparecer no painel; devolve True se ele apareceu."""
+        return self.aguardar(
+            lambda _driver: texto.lower() in self.safe_text(self.SUCCESS_MESSAGE).lower()
+        )
+
+    def _aguardar_painel(self, texto):
+        """Aguarda o texto no painel; se a página não responder, pausa para validação humana."""
+        if self._painel_contem(texto):
+            return
+        self._pausa_assistida(
+            lambda _driver: texto.lower() in self.safe_text(self.SUCCESS_MESSAGE).lower(),
+            f"texto {texto!r} no painel de resultado",
+        )
+
     def aguardar_resultado(self, texto):
         """Aguarda o texto aparecer no painel e devolve o conteúdo exibido."""
-        try:
-            WebDriverWait(self.driver, self.timeout).until(
-                lambda _driver: texto.lower() in self.safe_text(self.SUCCESS_MESSAGE).lower()
-            )
-        except TimeoutException:
-            pass
+        self._aguardar_painel(texto)
         return self.get_panel_text()
 
     def get_success_message(self):
         """Aguarda e retorna o texto do painel direito após a transferência."""
-        try:
-            WebDriverWait(self.driver, self.timeout).until(
-                lambda _driver: parametros.texto("mensagem_transferencia_concluida").lower()
-                in self.safe_text(self.SUCCESS_MESSAGE).lower()
-            )
-        except TimeoutException:
-            pass
+        self._aguardar_painel(parametros.texto("mensagem_transferencia_concluida"))
         return self.get_element_text(self.SUCCESS_MESSAGE)

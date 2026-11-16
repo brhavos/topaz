@@ -1042,3 +1042,403 @@ Execução iniciada em 16/11/2026 07:50:41
     Valor solicitado: (vazio)
     Situação........: RECUSADA
     Mensagem........: Error! An internal error has occurred and has been logged.
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 08:13:58
+==============================================================================
+
+[1] 16/11/2026 08:13:58 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_e52bf7462
+    Conta origem....: 124233
+    Conta destino...: 124344
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #124233 to account #124344. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 08:14:00 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_e52bf7462
+    Conta origem....: 124233
+    Conta destino...: 124344
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #124233 to account #124344. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 08:14:16 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_5055b7dee
+    Conta origem....: 125010
+    Conta destino...: 125121
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 08:19:10
+==============================================================================
+
+[1] 16/11/2026 08:19:10 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_5e9070328
+    Conta origem....: 128229
+    Conta destino...: 128340
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #128229 to account #128340. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 08:19:12 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_5e9070328
+    Conta origem....: 128229
+    Conta destino...: 128340
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #128229 to account #128340. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 08:19:29 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_326fe90e9
+    Conta origem....: 128562
+    Conta destino...: 128673
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 08:38:52
+==============================================================================
+
+[1] 16/11/2026 08:38:52 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_00be41bfb
+    Conta origem....: 147321
+    Conta destino...: 147432
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #147321 to account #147432. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 08:38:58 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_00be41bfb
+    Conta origem....: 147321
+    Conta destino...: 147432
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #147321 to account #147432. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 08:39:27 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_c6f5ee55a
+    Conta origem....: 147543
+    Conta destino...: 147654
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 09:00:57
+==============================================================================
+
+[1] 16/11/2026 09:00:57 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_40b76eb80
+    Conta origem....: 165747
+    Conta destino...: 165858
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #165747 to account #165858. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 09:01:09 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_40b76eb80
+    Conta origem....: 165747
+    Conta destino...: 165858
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #165747 to account #165858. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 09:01:54 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_6386244a0
+    Conta origem....: 165969
+    Conta destino...: 166080
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 10:40:19
+==============================================================================
+
+[1] 16/11/2026 10:40:19 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_963ef31d9
+    Conta origem....: 33546
+    Conta destino...: 33657
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #33546 to account #33657. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 10:40:21 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_963ef31d9
+    Conta origem....: 33546
+    Conta destino...: 33657
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #33546 to account #33657. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 10:40:37 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_66b3d6daa
+    Conta origem....: 33879
+    Conta destino...: 33990
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 10:50:50
+==============================================================================
+
+[1] 16/11/2026 10:50:50 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_f66434f64
+    Conta origem....: 34878
+    Conta destino...: 34989
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #34878 to account #34989. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 10:50:52 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_f66434f64
+    Conta origem....: 34878
+    Conta destino...: 34989
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #34878 to account #34989. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 10:51:07 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_a1492902b
+    Conta origem....: 35100
+    Conta destino...: 35211
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 11:08:26
+==============================================================================
+
+[1] 16/11/2026 11:08:26 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_040640d83
+    Conta origem....: 14565
+    Conta destino...: 14676
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #14565 to account #14676. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 11:08:28 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_040640d83
+    Conta origem....: 14565
+    Conta destino...: 14676
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #14565 to account #14676. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 11:08:43 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_d5feb07cc
+    Conta origem....: 14787
+    Conta destino...: 14898
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 11:17:49
+==============================================================================
+
+[1] 16/11/2026 11:17:49 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_0dfb75abc
+    Conta origem....: 18228
+    Conta destino...: 18339
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #18228 to account #18339. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 11:17:51 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_0dfb75abc
+    Conta origem....: 18228
+    Conta destino...: 18339
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #18228 to account #18339. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 11:18:08 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_257408b0c
+    Conta origem....: 18672
+    Conta destino...: 18783
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 11:24:52
+==============================================================================
+
+[1] 16/11/2026 11:24:52 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_60c392f4a
+    Conta origem....: 21336
+    Conta destino...: 21447
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #21336 to account #21447. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 11:24:54 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_60c392f4a
+    Conta origem....: 21336
+    Conta destino...: 21447
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #21336 to account #21447. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 11:25:12 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_739fa5b07
+    Conta origem....: 21558
+    Conta destino...: 21669
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".
+==============================================================================
+LOG DE TRANSAÇÕES - ParaBank
+Execução iniciada em 16/11/2026 11:54:44
+==============================================================================
+
+[1] 16/11/2026 11:54:44 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_0701d12ee
+    Conta origem....: 24666
+    Conta destino...: 24777
+    Valor solicitado: 10
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $10.00 has been transferred from account #24666 to account #24777. See Account Activity for more details.
+    Comentários.....: N/A
+
+[2] 16/11/2026 11:54:46 - TRANSAÇÃO VÁLIDA
+    Cenário BDD.....: Realizar as transferências válidas configuradas na planilha
+    Step............: Quando realizo as transferências válidas configuradas na planilha
+    Usuário.........: tr_0701d12ee
+    Conta origem....: 24666
+    Conta destino...: 24777
+    Valor solicitado: 15
+    Situação........: CONCLUÍDA
+    Mensagem........: Transfer Complete! $15.00 has been transferred from account #24666 to account #24777. See Account Activity for more details.
+    Comentários.....: N/A
+
+[3] 16/11/2026 11:55:01 - TRANSAÇÃO INVÁLIDA
+    Cenário BDD.....: Recusar as transferências com valores inválidos
+    Step............: Quando realizo as transferências inválidas configuradas na planilha
+    Usuário.........: tr_41719a637
+    Conta origem....: 24888
+    Conta destino...: 24999
+    Valor solicitado: (vazio)
+    Situação........: RECUSADA
+    Mensagem........: Error! An internal error has occurred and has been logged.
+    Comentários.....
+        - Problema: o valor da transferência foi enviado em branco, então o sistema não tinha quantia para movimentar e devolveu um erro interno genérico.
+        - Causas prováveis: o campo de valor é obrigatório, mas o formulário aceita o envio sem preenchimento (falta de validação antes do envio).
+        - Soluções possíveis: preencher um valor numérico maior que zero antes de clicar em Transfer; a correção definitiva é validar o campo no servidor e exibir uma mensagem clara, como "Informe o valor da transferência".

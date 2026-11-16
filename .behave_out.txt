@@ -1,0 +1,31 @@
+Funcionalidade: Autenticação de Usuário (Login) # features/login.feature:2
+  Como um cliente cadastrado
+  Quero realizar o login no ParaBank utilizando minhas credenciais
+  Para acessar o painel da minha conta com segurança
+  Cenário: Realizar login com credenciais válidas (Caminho Feliz)                        # features/login.feature:7
+    Dado que possuo um usuário ativo cadastrado no sistema                               # features/steps/steps_defs.py:52
+    E estou na página inicial de login do ParaBank                                       # features/steps/steps_defs.py:64
+    Quando informo meu usuário e senha válidos                                           # features/steps/steps_defs.py:71
+    E clico no botão de login                                                            # features/steps/steps_defs.py:78
+    Então devo ser autenticado com sucesso e redirecionado para a visão geral das contas # features/steps/steps_defs.py:83
+
+[Print salvo]: evidencias\20261116_085447-passed-realizar_login_com_credenciais_validas_caminho_feliz-devo_ser_autenticado_com_sucesso_e_redirecionado_para_a_visao_geral_das_contas.png
+
+  Esquema do Cenário: Tentativas de login inválidas ou incorretas -- @1.1      # features/login.feature:22
+    Dado que estou na página inicial de login do ParaBank                      # features/steps/steps_defs.py:64
+    Quando informo o usuário "usuario_inexistente" e a senha "senha123"        # features/steps/steps_defs.py:87
+    E clico no botão de login                                                  # features/steps/steps_defs.py:78
+    Então o sistema deve recusar o acesso e exibir a mensagem de erro esperada # features/steps/steps_defs.py:109
+
+[Print salvo]: evidencias\20261116_085514-passed-tentativas_de_login_invalidas_ou_incorretas_1_1-o_sistema_deve_recusar_o_acesso_e_exibir_a_mensagem_de_erro_esperada.png
+
+  Esquema do Cenário: Tentativas de login inválidas ou incorretas -- @1.2      # features/login.feature:23
+    Dado que estou na página inicial de login do ParaBank                      # features/steps/steps_defs.py:64
+    Quando informo o usuário "" e a senha ""                                   # features/steps/steps_defs.py:100
+    E clico no botão de login                                                  # features/steps/steps_defs.py:78
+    Então o sistema deve recusar o acesso e exibir a mensagem de erro esperada # features/steps/steps_defs.py:109
+
+[Print salvo]: evidencias\20261116_085538-passed-tentativas_de_login_invalidas_ou_incorretas_1_2-o_sistema_deve_recusar_o_acesso_e_exibir_a_mensagem_de_erro_esperada.png
+
+  Esquema do Cenário: Tentativas de login inválidas ou incorretas -- @1.3      # features/login.feature:24
+    Dado que estou na página inicial de login do ParaBank                      # features/steps/steps_defs.py:64

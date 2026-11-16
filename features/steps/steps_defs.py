@@ -12,6 +12,11 @@ from pages.login_page import LoginPage
 from pages.transfer_page import TransferPage
 
 
+# Texto dos steps que geram transações, usado no decorator e no registro do log.
+STEP_TRANSFERENCIAS_VALIDAS = "realizo as transferências válidas configuradas na planilha"
+STEP_TRANSFERENCIAS_INVALIDAS = "realizo as transferências inválidas configuradas na planilha"
+
+
 def human_type(element, text):
     """Simula a digitação de um ser humano, inserindo caractere por caractere com uma pausa leve."""
     element.clear()
@@ -54,7 +59,7 @@ def step_impl(context):
         **parametros.formulario("LOGIN", context.test_username)
     )
     context.register_page.submit_register()
-    context.driver.get(parametros.texto("url_logout"))
+    context.register_page.abrir(parametros.texto("url_logout"))
 
 @given('estou na página inicial de login do ParaBank')
 @given('que estou na página inicial de login do ParaBank')
@@ -163,7 +168,7 @@ def step_impl(context):
             print(f"[Cadastro] {indice}/{len(usuarios)} - {rotulo}: FALHOU ({erro})")
         finally:
             # Encerra a sessão para o próximo cadastro começar do zero.
-            context.driver.get(parametros.texto("url_logout"))
+            context.register_page.abrir(parametros.texto("url_logout"))
 
     context.usuarios_validos_cadastrados = cadastrados
     assert not falhas, "Usuários válidos não cadastrados:\n" + "\n".join(falhas)
@@ -224,7 +229,8 @@ def step_impl(context):
 
 
 # ------------------------------------------------ transferências em massa
-def _registrar_no_log(context, origem, destino, valor, tipo, sucesso, mensagem):
+def _registrar_no_log(context, origem, destino, valor, tipo, sucesso, mensagem, step):
+    """Registra a transação no log, identificando o cenário BDD e o step de origem."""
     registrar_transacao(
         usuario=context.test_username,
         conta_origem=origem,
@@ -233,9 +239,11 @@ def _registrar_no_log(context, origem, destino, valor, tipo, sucesso, mensagem):
         tipo=tipo,
         sucesso=sucesso,
         mensagem=mensagem,
+        cenario=context.scenario.name,
+        step=f"Quando {step}",
     )
 
-@when('realizo as transferências válidas configuradas na planilha')
+@when(STEP_TRANSFERENCIAS_VALIDAS)
 def step_impl(context):
     quantidade = parametros.inteiro("quantidade_transferencias_validas")
     valores = parametros.sequencia("valores_transferencia_validos", quantidade)
@@ -250,11 +258,14 @@ def step_impl(context):
         assert any(mensagem_esperada in mensagem for mensagem_esperada in mensagens), (
             f"Transferência {indice} ({valor}) não concluída: {mensagem}"
         )
-        _registrar_no_log(context, origem, destino, valor, "VALIDA", True, mensagem)
+        _registrar_no_log(
+            context, origem, destino, valor, "VALIDA", True, mensagem,
+            STEP_TRANSFERENCIAS_VALIDAS,
+        )
         context.transferencias_validas += 1
         print(f"[Transferência válida] {indice}/{len(valores)} - {valor}: OK ({origem} -> {destino})")
 
-@when('realizo as transferências inválidas configuradas na planilha')
+@when(STEP_TRANSFERENCIAS_INVALIDAS)
 def step_impl(context):
     quantidade = parametros.inteiro("quantidade_transferencias_invalidas")
     tokens = parametros.sequencia("valores_transferencia_invalidos", quantidade)
@@ -274,7 +285,10 @@ def step_impl(context):
         assert sucesso.lower() not in mensagem.lower(), (
             f"Transferência inválida {indice} ({token}) foi concluída: {mensagem}"
         )
-        _registrar_no_log(context, origem, destino, valor, "INVALIDA", False, mensagem)
+        _registrar_no_log(
+            context, origem, destino, valor, "INVALIDA", False, mensagem,
+            STEP_TRANSFERENCIAS_INVALIDAS,
+        )
         context.transferencias_invalidas += 1
         print(f"[Transferência inválida] {indice}/{len(tokens)} - {token!r}: recusada")
 

@@ -64,6 +64,8 @@ PARAMETROS = [
      "Pausa curta antes de clicar/submeter uma acao, em segundos"),
     ("TEMPOS", "pausa_login", 1.0,
      "Pausa extra antes de preencher o formulario de login, em segundos"),
+    ("TEMPOS", "espera_verificacao_humana", 5,
+     "Espera pela verificacao de humanidade do Cloudflare, em segundos; sem liberar nesse prazo, o teste falha"),
 
     # ---------------------------------------------------------------- USUARIOS
     ("USUARIOS", "tamanho_sufixo_usuario", 9,

@@ -18,7 +18,7 @@ class LoginPage(BasePage):
 
     def open(self):
         """Acede à página inicial de login."""
-        self.driver.get(self.URL)
+        self.abrir(self.URL)
 
     def login(self, username, password):
         """Preenche o utilizador e senha e clica em Log In."""
@@ -41,7 +41,15 @@ class LoginPage(BasePage):
                                len(driver.find_elements(*self.ACCOUNT_OVERVIEW)) > 0
             )
             return True
-        except:
+        except Exception:  # noqa: BLE001 - a página pode estar bloqueada pelo Cloudflare
+            # Se o Cloudflare pediu verificação, pausa até a confirmação e confere de novo.
+            if self._verificacao_humana_pendente():
+                self._pausa_assistida(
+                    lambda driver: len(driver.find_elements(*self.LOGOUT_LINK)) > 0
+                    or len(driver.find_elements(*self.ACCOUNT_OVERVIEW)) > 0,
+                    "painel do cliente logado",
+                )
+                return True
             return False
 
     def logout(self):
