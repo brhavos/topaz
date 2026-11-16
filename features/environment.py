@@ -1,4 +1,7 @@
 import os
+import re
+import unicodedata
+from datetime import datetime
 
 from selenium import webdriver
 
@@ -35,17 +38,63 @@ def before_scenario(context, scenario):
     if hasattr(context, 'driver'):
         context.driver.delete_all_cookies()
 
+def _sanitizar(nome):
+    """Deixa o texto seguro para nome de arquivo (sem acentos, espaços ou símbolos)."""
+    nome = unicodedata.normalize("NFKD", str(nome or ""))
+    nome = nome.encode("ascii", "ignore").decode("ascii")
+    nome = re.sub(r"[^A-Za-z0-9]+", "_", nome)
+    return nome.strip("_").lower()
+
+
+def _nome_status(status):
+    """Nome do status do behave, seja ele enum (Status.failed) ou texto."""
+    return getattr(status, "name", str(status)).lower()
+
+
+def _situacao(scenario):
+    """Situação do cenário no nome da evidência: passed ou no_passed."""
+    return "passed" if _nome_status(scenario.status) == "passed" else "no_passed"
+
+
+def _step_evidencia(scenario):
+    """Step que estava em execução: o que falhou ou, sem falha, o último executado."""
+    steps = list(scenario.all_steps)
+    if not steps:
+        return ""
+
+    for step in steps:
+        if _nome_status(step.status) == "failed":
+            return step.name
+
+    executados = [
+        step for step in steps
+        if _nome_status(step.status) not in ("skipped", "untested")
+    ]
+    return (executados or steps)[-1].name
+
+
+def _nome_evidencia(scenario, agora=None):
+    """Monta aaaammdd_hhmmss-situacao-nome_do_cenario-nome_do_step."""
+    agora = agora or datetime.now()
+    partes = [
+        agora.strftime("%Y%m%d_%H%M%S"),
+        _situacao(scenario),
+        _sanitizar(scenario.name),
+        _sanitizar(_step_evidencia(scenario)),
+    ]
+    return "-".join(parte for parte in partes if parte)
+
+
 def after_scenario(context, scenario):
     # Verifica se o navegador (Selenium) está ativo
     if hasattr(context, 'driver'):
         # Cria a pasta de evidências automaticamente se ela não existir
         pasta = parametros.texto("pasta_evidencias")
         os.makedirs(pasta, exist_ok=True)
-        
-        # Cria um nome limpo para o arquivo baseado no nome do seu cenário
-        nome_limpo = scenario.name.replace(' ', '_').replace('/', '-')
-        caminho_arquivo = os.path.join(pasta, f"{nome_limpo}.png")
-        
+
+        # Nome no padrão: aaaammdd_hhmmss-situacao-nome_do_cenario-nome_do_step
+        caminho_arquivo = os.path.join(pasta, f"{_nome_evidencia(scenario)}.png")
+
         # Tira o print da tela e salva na pasta
         context.driver.save_screenshot(caminho_arquivo)
         print(f"\n[Print salvo]: {caminho_arquivo}")

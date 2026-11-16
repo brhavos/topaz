@@ -56,7 +56,15 @@
 # 2-) EVIDÊNCIAS
 
     As imagens das evidências encontram-se na pasta "evidencias", do projeto.
-    	* Toda vez que o teste automatizado é executado, elas são atualizadas (sobrepostas) automaticamente.
+    	* Toda vez que o teste automatizado é executado, novas imagens são geradas automaticamente.
+    	* Como o nome inclui data e hora, execuções diferentes não se sobrescrevem: a pasta acumula
+    	  o histórico. A limpeza é manual, se desejar.
+
+    Padrão dos nomes das imagens:
+		aaaammdd_hhmmss-situacao-nome_do_cenario-nome_do_step.png
+		* situacao = "passed" (cenário aprovado) ou "no_passed" (reprovado ou não executado);
+		* o step registrado é o que falhou ou, quando não há falha, o último step executado;
+		* acentos e símbolos são removidos (ex.: "transferências" -> "transferencias").
 
     Para dar fé na eficácia da solução, criei um vídeo demonstrativo.
     Ele foi colocado na pasta "docs" e o seu nome é "evidencia_completa.mp4".
